@@ -183,11 +183,20 @@
       <!-- Step 4: Summary -->
       <section class="step-card active" aria-label="Step 4: Summary">
         <fieldset class="personal-info-group">
-          <legend class="personal-info-header">Finishing up <br><span class="span-personal-info">Double-check everything looks OK before confirming.</span></legend>
+          <legend class="personal-info-header">Finishing up <br><span class="span-personal-info">Double-check everything
+              looks OK before confirming.</span></legend>
 
-          <!-- Dynamically add subscription and add-on selections here -->
-  
-          Total (per month/year)
+          <div class="summary-container">
+            <div class="dynamically-selected-options">
+              <!-- Dynamically add subscription and add-on selections here -->
+            </div>
+
+            <div class="total-group">
+              <span>Total (per month/year):</span>
+              <span id="total-price" class="total-price">$0/mo</span>
+            </div>
+
+          </div>
 
         </fieldset>
       </section>

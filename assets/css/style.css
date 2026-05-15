@@ -495,6 +495,22 @@ body {
 
 /* Step 4: Summary */
 
+.summary-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-block-start: var(--size-xl); /* 2rem */
+  padding-block-end: var(--size-s); /* 1.25rem */
+}
+
+.summary-container .dynamically-selected-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-xl); /* 2rem */
+  width: 450px;
+  height: 229px;
+}
+
 /* footer buttons container */
 .footer-buttons-container {
   display: flex;
