@@ -68,14 +68,14 @@
       <!-- ************************** -->
       <!-- Step 2: Select plan -->
       <section class="step-card active" aria-label="Step 2: Select plan">
-        <fieldset class="plans-group">
-          <legend class="sr-only">Select your plan</legend>
-          <p class="p-plan-info">You have the option of monthly or yearly billing.</p>
+        <fieldset class="personal-info-group">
+          <legend class="personal-info-header">Select your plan <br><span class="span-personal-info">You have the option of monthly or yearly billing.</span></legend>
+          
           <div class="plan-item-container">
             <!-- plan option arcade -->
             <div class="plan-item">
               <input type="radio" id="plan-arcade" name="plan" value="arcade" required checked>
-              <label class="plan-card" for="plan-arcade">
+              <label class="plan-card" for="plan-arcade" isActive="false" isDetailed="false" aria-label="Select Arcade plan, $9 per month or $90 per year">
                 <img src="./assets/images/icon-arcade.svg" alt="Arcade plan icon" class="plan-icon">
                 <div class="plan-details">
                   <span class="plan-name">Arcade</span>
@@ -110,10 +110,12 @@
         <!-- billing toggle -->
         <div class="billing-toggle">
           <span class="toggle-label monthly active">Monthly</span>
+          
           <label class="switch" aria-label="Toggle billing cycle">
             <input type="checkbox" id="billing-cycle">
             <span class="slider"></span>
           </label>
+
           <span class="toggle-label yearly">Yearly</span>
         </div>
       </section>

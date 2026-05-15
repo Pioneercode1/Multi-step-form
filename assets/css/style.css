@@ -8,10 +8,11 @@
   --blue-200: hsl(206, 94%, 87%);
   --red-500: hsl(354, 84%, 57%);
   /*Colors Neutral*/
+  --light-gray: hsl(231, 100%, 99%);
+  --gray: hsl(252, 7%, 86%);
   --grey-500: hsl(231, 11%, 63%);
   --purple-200: hsl(229, 24%, 87%);
   --blue-100: hsl(218, 100%, 97%);
-  --blue-50: hsl(231, 100%, 99%);
   --white: hsl(0, 0%, 100%);
 
   /* Fonts Weights */
@@ -205,7 +206,10 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
-.step-card fieldset {border: none;}
+
+.step-card fieldset {
+  border: none;
+}
 
 /* Step 1 - Plan Selection */
 .personal-info-header {
@@ -237,10 +241,14 @@ body {
 .input-personal-group input {
   width: 100%;
   height: 48px;
-  padding-inline: var(--size-xs); /* 16px */
-  padding-block: var(--size-xs); /* 12px */
-  margin-block-start: var(--size-ms); /* 8px */
-  margin-block-end: var(--size-l); /* 1.75rem */
+  padding-inline: var(--size-xs);
+  /* 16px */
+  padding-block: var(--size-xs);
+  /* 12px */
+  margin-block-start: var(--size-ms);
+  /* 8px */
+  margin-block-end: var(--size-l);
+  /* 1.75rem */
   border: 1px solid var(--purple-200);
   border-radius: var(--size-ms);
   /* 8px */
@@ -255,37 +263,19 @@ body {
 
 .plan-item-container {
   display: flex;
-  gap: var(--size-s);
-  /* 1.5rem */
-}
-
-.sr-only {
-  display: block;
-  padding: 0;
-  margin: 16px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
-.plans-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--size-s);
-  /* 1.5rem */
-  border: none;
-  padding: 0;
-  margin: var(--size-xl) 0;
+  justify-content: space-between;
+  gap: var(--size-xl);
+  /* 2rem */
+  padding-block-start: var(--size-xxl);
+  /* 2.5rem */
+  width: 450px;
+  height: 234px;
 }
 
 .plan-item input[type="radio"] {
   position: absolute;
   opacity: 0;
   pointer-events: none;
-}
-
-.plan-item {
-  flex: 1;
 }
 
 .plan-item input[type="radio"]:checked+.plan-card {
@@ -296,14 +286,15 @@ body {
 .plan-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  padding: var(--size-s) var(--size-m);
-  /* 1.25rem 1.5rem */
-  border: 1px solid #d6d9e6;
-  border-radius: var(--size-m);
+  align-items: space-between;
+  width: 133.33px;
+  height: 160px;
+  padding: var(--size-m);
+  /* 1.5rem */
+  border: 1px solid var(--gray);
+  border-radius: var(--size-ms);
   /* 8px */
-  background-color: #ffffff;
+  background-color: var(--white);
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -312,8 +303,14 @@ body {
   border-color: #473dff;
 }
 
+.plan-card .plan-details {
+  width: 101.33px;
+  height: 38px;
+}
+
 .plan-icon {
   width: 40px;
+  height: 40px;
   margin-bottom: var(--size-xl);
   /* 2.5rem */
 }
@@ -322,8 +319,7 @@ body {
   display: block;
   color: #02295a;
   font-weight: 700;
-  margin-bottom: var(--size-xs);
-  /* 1rem */
+  margin-bottom: 4px;
 }
 
 .plan-price {
@@ -335,12 +331,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--size-s);
-  /* 1.5rem */
-  background-color: #f8f9ff;
-  padding: var(--size-m);
-  /* 1.5rem */
-  border-radius: var(--size-m);
+  gap: var(--size-xl);
+  /* 2rem */
+  width: 450px;
+  height: 42px;
+  background-color: var(--light-gray);
+  padding: var(--size-ms);
+  /* .5rem */
+  border-radius: var(--size-ms);
   /* 8px */
 }
 
@@ -358,9 +356,8 @@ body {
 .switch {
   position: relative;
   display: inline-block;
-  width: var(--size-4xl);
-  /* 3rem */
-  height: var(--size-m);
+  width: 36px;
+  height: 18px;
   /* 1.5rem */
 }
 
@@ -385,8 +382,8 @@ body {
 .slider:before {
   position: absolute;
   content: "";
-  height: 14px;
-  width: 14px;
+  height: 10px;
+  width: 10px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -395,10 +392,11 @@ body {
 }
 
 .switch input:checked+.slider:before {
-  transform: translateX(23px);
+  transform: translateX(20px);
 }
 
 /* Step 3: Add-ons */
+
 /* Step 4: Summary */
 
 /* footer buttons container */
