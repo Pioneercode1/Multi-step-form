@@ -12,7 +12,7 @@
   --purple-200: hsl(229, 24%, 87%);
   --blue-100: hsl(218, 100%, 97%);
   --blue-50: hsl(231, 100%, 99%);
-  --white: hsl(0, 100%, 100%);
+  --white: hsl(0, 0%, 100%);
 
   /* Fonts Weights */
   --weight-regular: 400;
@@ -65,14 +65,8 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-weight: var(--weight-regular);
   font-style: normal;
-}
-
-.app-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  min-height: 100vh;
+  display: grid;
+  place-items: center;
 }
 
 /* navigation container */
@@ -154,19 +148,40 @@ body {
   text-wrap: nowrap;
 }
 
-/* Step card */
-.step-card {
-  background-color: var(--white);
-  padding: var(--size-l);
-  box-shadow: var(--shadow-m);
+.app-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 940px;
   height: 600px;
-  margin-block-start: 105px;
-  margin-inline-start: 250px;
+  background-color: var(--white);
   border-radius: var(--size-xs);
   /* 16px */
-  display: none;
+  padding: var(--size-m);
+  margin-block-start: 105px;
+  margin-inline-start: 250px;
+}
+
+/* multi form container */
+#multi-form {
+  width: 450px;
+  height: 568px;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block-start: var(--size-xl); /* 2rem */
+  padding-block-end: var(--size-xs); /* 1rem */
+}
+
+/* Step card */
+.step-card {
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 450px;
+  height: 568px;
   opacity: 1;
   pointer-events: none;
 }
@@ -177,13 +192,15 @@ body {
   pointer-events: auto;
 }
 
-.multi-form {
-  width: fit-content;
-  height: fit-content
-}
-
 /* Step 1 - Plan Selection */
-
+.personal-info-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-xs);
+  /* 1rem */
+  margin-bottom: var(--size-xl);
+  /* 2rem */
+}
 /* Step 2: Select plan */
 
 .plan-item-container {

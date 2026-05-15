@@ -27,12 +27,12 @@
         <li class="step-item" aria-current="step">
           <span class="step-item-index" aria-current="step">1</span>
           <span class="step-item-number">step 1 <br><span class="step-item-title">Your info</span></span>
-          
+
         </li>
         <li class="step-item" aria-current="step">
           <span class="step-item-index">2</span>
           <span class="step-item-number">step 2 <br><span class="step-item-title">Select plan</span></span>
-          
+
         </li>
         <li class="step-item" aria-current="step">
           <span class="step-item-index">3</span>
@@ -50,10 +50,11 @@
     <form id="multi-form">
       <!-- Step 1: Your info -->
       <section class="step-card active">
-        <fieldset>
-          <legend>Personal info</legend>
-          <p class="p-personal-info">Please provide your name, email address, and phone number.</p>
-
+        <fieldset class="personal-info-group">
+          <div class="personal-info-header">
+            <legend>Personal info</legend>
+            <p class="p-personal-info">Please provide your name, email address, and phone number.</p>
+          </div>
           <label for="name">Name</label>
           <input type="text" id="name" placeholder="e.g. Stephen King" required>
 
