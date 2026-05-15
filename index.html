@@ -49,25 +49,25 @@
     <!-- Start form -->
     <form id="multi-form">
       <!-- Step 1: Your info -->
-      <section class="step-card active">
+      <section class="step-card" aria-label="Step 1: Your info">
         <fieldset class="personal-info-group">
-          <div class="personal-info-header">
-            <legend>Personal info</legend>
-            <p class="p-personal-info">Please provide your name, email address, and phone number.</p>
+          <legend class="personal-info-header">Personal info <br><span class="span-personal-info">Please provide your
+              name, email address, and phone number.</span></legend>
+          <div class="input-personal-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="e.g. Stephen King" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="e.g. stephenking@lorem.com" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="e.g. +1 234 567 890" required>
           </div>
-          <label for="name">Name</label>
-          <input type="text" id="name" placeholder="e.g. Stephen King" required>
-
-          <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="e.g. stephenking@lorem.com" required>
-
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="e.g. +1 234 567 890" required>
         </fieldset>
       </section>
       <!-- ************************** -->
       <!-- Step 2: Select plan -->
-      <section class="step-card">
+      <section class="step-card active" aria-label="Step 2: Select plan">
         <fieldset class="plans-group">
           <legend class="sr-only">Select your plan</legend>
           <p class="p-plan-info">You have the option of monthly or yearly billing.</p>
@@ -119,7 +119,7 @@
       </section>
       <!-- ************************** -->
       <!-- Step 3: Add-ons -->
-      <section class="step-card">
+      <section class="step-card" aria-label="Step 3: Add-ons">
 
         <!-- Step 3 start -->
 
@@ -142,7 +142,7 @@
       </section>
       <!-- ************************** -->
       <!-- Step 4: Summary -->
-      <section class="step-card">
+      <section class="step-card" aria-label="Step 4: Summary">
         <!-- Step 4 start -->
 
         Finishing up
@@ -160,10 +160,12 @@
 
       <!-- ************************** -->
       <!-- footer button -->
-      <footer class="footer-button-container">
-        <button type="button" hidden>Go Back</button>
-        <button type="button">Next Step</button>
-        <button type="submit" hidden>Confirm</button>
+      <footer class="footer-buttons-container" aria-label="Form navigation">
+        <div class="buttons-group">
+          <button type="button" id="btn-back" data-back hidden>Go Back</button>
+          <button type="button" id="btn-next" data-next>Next Step</button>
+          <button type="submit" id="btn-confirm" data-confirm hidden>Confirm</button>
+        </div>
       </footer>
 
     </form>
