@@ -65,17 +65,20 @@
           </div>
         </fieldset>
       </section>
+      <!-- Step 1 end -->
       <!-- ************************** -->
       <!-- Step 2: Select plan -->
-      <section class="step-card active" aria-label="Step 2: Select plan">
+      <section class="step-card" aria-label="Step 2: Select plan">
         <fieldset class="personal-info-group">
-          <legend class="personal-info-header">Select your plan <br><span class="span-personal-info">You have the option of monthly or yearly billing.</span></legend>
-          
+          <legend class="personal-info-header">Select your plan <br><span class="span-personal-info">You have the option
+              of monthly or yearly billing.</span></legend>
+
           <div class="plan-item-container">
             <!-- plan option arcade -->
             <div class="plan-item">
               <input type="radio" id="plan-arcade" name="plan" value="arcade" required checked>
-              <label class="plan-card" for="plan-arcade" isActive="false" isDetailed="false" aria-label="Select Arcade plan, $9 per month or $90 per year">
+              <label class="plan-card" for="plan-arcade" isActive="false" isDetailed="false"
+                aria-label="Select Arcade plan, $9 per month or $90 per year">
                 <img src="./assets/images/icon-arcade.svg" alt="Arcade plan icon" class="plan-icon">
                 <div class="plan-details">
                   <span class="plan-name">Arcade</span>
@@ -110,7 +113,7 @@
         <!-- billing toggle -->
         <div class="billing-toggle">
           <span class="toggle-label monthly active">Monthly</span>
-          
+
           <label class="switch" aria-label="Toggle billing cycle">
             <input type="checkbox" id="billing-cycle">
             <span class="slider"></span>
@@ -119,47 +122,76 @@
           <span class="toggle-label yearly">Yearly</span>
         </div>
       </section>
+      <!-- Step 2 end -->
       <!-- ************************** -->
       <!-- Step 3: Add-ons -->
       <section class="step-card" aria-label="Step 3: Add-ons">
+        <fieldset class="personal-info-group">
+          <legend class="personal-info-header">Pick add-ons <br><span class="span-personal-info">Add-ons help enhance
+              your gaming experience.</span></legend>
 
-        <!-- Step 3 start -->
+          <div class="addons-item-container">
+            <!-- add-on option online service -->
+            <div class="addon-item">
+              <input type="checkbox" id="addon-online-service" name="addon" value="online-service">
 
-        Pick add-ons
-        Add-ons help enhance your gaming experience.
+              <label class="addon-card" for="addon-online-service"
+                aria-label="Select Online Service add-on, $1 per month or $10 per year">
 
-        Online service
-        Access to multiplayer games
-        +$1/mo
+                <div class="addon-details">
+                  <span class="addon-name">Online service</span>
+                  <span class="addon-description">Access to multiplayer games</span>
+                </div>
 
-        Larger storage
-        Extra 1TB of cloud save
-        +$2/mo
+                <span class="addon-price" data-monthly="$1/mo" data-yearly="$10/yr">$1/mo</span>
 
-        Customizable Profile
-        Custom theme on your profile
-        +$2/mo
+              </label>
+            </div>
 
-        <!-- Step 3 end -->
+            <!-- add-on option larger storage -->
+            <div class="addon-item">
+              <input type="checkbox" id="addon-larger-storage" name="addon" value="larger-storage">
+              <label class="addon-card" for="addon-larger-storage"
+                aria-label="Select Larger Storage add-on, $2 per month or $20 per year">
+                <div class="addon-details">
+                  <span class="addon-name">Larger storage</span>
+                  <span class="addon-description">Extra 1TB of cloud save</span>
+                </div>
+                <span class="addon-price" data-monthly="$2/mo" data-yearly="$20/yr">$2/mo</span>
+              </label>
+            </div>
+
+            <!-- add-on option customizable profile -->
+            <div class="addon-item">
+              <input type="checkbox" id="addon-customizable-profile" name="addon" value="customizable-profile">
+              <label class="addon-card" for="addon-customizable-profile"
+                aria-label="Select Customizable Profile add-on, $2 per month or $20 per year">
+                <div class="addon-details">
+                  <span class="addon-name">Customizable profile</span>
+                  <span class="addon-description">Custom theme on your profile</span>
+                </div>
+                <span class="addon-price" data-monthly="$2/mo" data-yearly="$20/yr">$2/mo</span>
+              </label>
+            </div>
+
+          </div>
+
+        </fieldset>
       </section>
+      <!-- Step 3 end -->
       <!-- ************************** -->
       <!-- Step 4: Summary -->
-      <section class="step-card" aria-label="Step 4: Summary">
-        <!-- Step 4 start -->
+      <section class="step-card active" aria-label="Step 4: Summary">
+        <fieldset class="personal-info-group">
+          <legend class="personal-info-header">Finishing up <br><span class="span-personal-info">Double-check everything looks OK before confirming.</span></legend>
 
-        Finishing up
-        Double-check everything looks OK before confirming.
+          <!-- Dynamically add subscription and add-on selections here -->
+  
+          Total (per month/year)
 
-        <!-- Dynamically add subscription and add-on selections here -->
-
-        Total (per month/year)
-
-        Go Back
-        Confirm
-
-        <!-- Step 4 end -->
+        </fieldset>
       </section>
-
+      <!-- Step 4 end -->
       <!-- ************************** -->
       <!-- footer button -->
       <footer class="footer-buttons-container" aria-label="Form navigation">

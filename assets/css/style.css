@@ -3,14 +3,18 @@
 :root {
   /*Colors Primary*/
   --blue-950: hsl(213, 96%, 18%);
-  --purple-600: hsl(243, 100%, 62%);
+  --black: hsla(0, 0%, 0%, 1);
   --blue-300: hsl(228, 100%, 84%);
   --blue-200: hsl(206, 94%, 87%);
   --red-500: hsl(354, 84%, 57%);
   /*Colors Neutral*/
+  --gray-1: hsl(230, 3%, 62%);
   --light-gray: hsl(231, 100%, 99%);
   --gray: hsl(252, 7%, 86%);
   --grey-500: hsl(231, 11%, 63%);
+  --violet: hsl(243, 31%, 44%);
+  --violet-2: hsl(243, 100%, 62%);
+  --light-violet: hsl(230, 75%, 98%);
   --purple-200: hsl(229, 24%, 87%);
   --blue-100: hsl(218, 100%, 97%);
   --white: hsl(0, 0%, 100%);
@@ -396,6 +400,98 @@ body {
 }
 
 /* Step 3: Add-ons */
+.addons-item-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-xs);
+  padding-block-start: var(--size-xl);
+  /* 2rem */
+  width: 450px;
+  height: 266px;
+}
+
+.addon-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 78px;
+  padding-inline: var(--size-m);
+  /* 24px */
+  padding-block: var(--size-s);
+  /* 1.25rem */
+  border: 1px solid var(--gray-1);
+  border-radius: var(--size-ms);
+  /* 8px */
+  background-color: var(--white);
+}
+
+.addon-item:hover {
+  outline: 2px solid var(--violet);
+}
+
+.addon-item input[type="checkbox"] {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.addon-item input[type="checkbox"]:checked {
+  opacity: 1;
+  pointer-events: auto;
+  background-color: var(--violet-2);
+}
+
+.addon-item:has(input[type="checkbox"]:checked) {
+  border-color: var(--violet);
+  background-color: var(--light-violet);
+}
+
+.addon-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-s);
+  /* 1.25rem */
+  width: 100%;
+  height: 48px;
+  background-color: transparent;
+}
+
+.addon-card .addon-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 284px;
+  height: 38px;
+  margin-inline-start: 40px;
+}
+
+.addon-name {
+  color: var(--black);
+  font-weight: var(--weight-bold);
+  line-height: 100%;
+  width: 284px;
+  height: 18px;
+}
+
+.addon-description {
+  color: var(--gray-1);
+  font-size: 0.857rem;
+  line-height: 100%;
+  width: 284px;
+  height: 16px;
+}
+
+.addon-price {
+  color: var(--violet);
+  font-size: 0.857rem;
+  line-height: 100%;
+  width: 50px;
+  height: 16px;
+}
 
 /* Step 4: Summary */
 
