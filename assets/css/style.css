@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+:root {
+  /*Colors Primary*/
+  --blue-950: hsl(213, 96%, 18%);
+  --purple-600: hsl(243, 100%, 62%);
+  --blue-300: hsl(228, 100%, 84%);
+  --blue-200: hsl(206, 94%, 87%);
+  --red-500: hsl(354, 84%, 57%);
+  /*Colors Neutral*/
+  --grey-500: hsl(231, 11%, 63%);
+  --purple-200: hsl(229, 24%, 87%);
+  --blue-100: hsl(218, 100%, 97%);
+  --blue-50: hsl(231, 100%, 99%);
+  --white: hsl(0, 100%, 100%);
+
+  /* Fonts Weights */
+  --weight-regular: 400;
+  --weight-normal: 500;
+  --weight-bold: 700;
+
+  /*Spacing*/
+  --size-ms: 0.5rem;
+  --size-xxs: 0.75rem;
+  --size-xs: 1rem;
+  --size-s: 1.25rem;
+  --size-m: 1.5rem;
+  --size-l: 1.75rem;
+  --size-xl: 2rem;
+  --size-xxl: 2.5rem;
+  --size-3xl: 2.75rem;
+  --size-4xl: 3rem;
+
+  /*Shadows*/
+  --shadow-s: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-m: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-l: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  /*Transitions*/
+  --transition-s: 0.2s ease-in-out;
+  --transition-m: 0.3s ease-in-out;
+  --transition-l: 0.5s ease-in-out;
+
+  /*Site Size*/
+  --mobile-width: 375px;
+  --tablet-width: 768px;
+  --desktop-width: 1440px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--blue-100);
+  font-family: "Ubuntu", sans-serif;
+  font-weight: var(--weight-regular);
+  font-style: normal;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+/* navigation container */
+.nav-step-container {
+  width: 274px;
+  height: 568px;
+  background-color: var(--blue-950);
+  border-radius: var(--size-xs);
+  /* 16px */
+  margin-right: var(--size-m);
+  /* 40px */
+  position: relative;
+}
+
+.nav-step-container img {
+  width: 274px;
+  height: 568px;
+}
+
+.steps-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-xl);
+  /* 32px */
+  width: 147px;
+  height: 224px;
+  margin-block-start: var(--size-xxl);
+  /* 40px */
+  margin-inline-start: var(--size-xl);
+  /* 32px */
+  position: absolute;
+  inset: 0;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: var(--size-xs);
+  /* 1rem */
+  width: 100%;
+  color: var(--white);
+  font-weight: var(--weight-bold);
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.step-item .step-item-index {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--size-xl);
+  /* 2.75rem */
+  height: var(--size-xl);
+  /* 2.75rem */
+  background-color: transparent;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+}
+
+.step-item .step-item-index[aria-current="step"] {
+  background-color: var(--blue-200);
+  color: var(--blue-950);
+  border-color: var(--blue-200);
+}
+
+.step-item .step-item-number {
+  width: fit-content;
+  color: var(--grey-500);
+  font-weight: var(--weight-normal);
+  font-size: var(--size-xxs);
+}
+
+.step-item .step-item-title {
+  width: fit-content;
+  color: var(--white);
+  font-weight: var(--weight-bold);
+  font-size: .9rem;
+  text-wrap: nowrap;
+}
+
+/* Step card */
+.step-card {
+  background-color: var(--white);
+  padding: var(--size-l);
+  box-shadow: var(--shadow-m);
+  width: 940px;
+  height: 600px;
+  margin-block-start: 105px;
+  margin-inline-start: 250px;
+  border-radius: var(--size-xs);
+  /* 16px */
+  display: none;
+  flex-direction: column;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.step-card.active {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.multi-form {
+  width: fit-content;
+  height: fit-content
+}
+
+/* Step 1 - Plan Selection */
+
+/* Step 2: Select plan */
+
+.plan-item-container {
+  display: flex;
+  gap: var(--size-s);
+  /* 1.5rem */
+}
+
+.sr-only {
+  display: block;
+  padding: 0;
+  margin: 16px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.plans-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-s);
+  /* 1.5rem */
+  border: none;
+  padding: 0;
+  margin: var(--size-xl) 0;
+}
+
+.plan-item input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.plan-item {
+  flex: 1;
+}
+
+.plan-item input[type="radio"]:checked+.plan-card {
+  border-color: #473dff;
+  background-color: #f8f9ff;
+}
+
+.plan-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: var(--size-s) var(--size-m);
+  /* 1.25rem 1.5rem */
+  border: 1px solid #d6d9e6;
+  border-radius: var(--size-m);
+  /* 8px */
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.plan-card:hover {
+  border-color: #473dff;
+}
+
+.plan-icon {
+  width: 40px;
+  margin-bottom: var(--size-xl);
+  /* 2.5rem */
+}
+
+.plan-name {
+  display: block;
+  color: #02295a;
+  font-weight: 700;
+  margin-bottom: var(--size-xs);
+  /* 1rem */
+}
+
+.plan-price {
+  color: #9699ab;
+  font-size: 0.9rem;
+}
+
+.billing-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--size-s);
+  /* 1.5rem */
+  background-color: #f8f9ff;
+  padding: var(--size-m);
+  /* 1.5rem */
+  border-radius: var(--size-m);
+  /* 8px */
+}
+
+.toggle-label {
+  color: #9699ab;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.toggle-label.active {
+  color: #02295a;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: var(--size-4xl);
+  /* 3rem */
+  height: var(--size-m);
+  /* 1.5rem */
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #02295a;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+.switch input:checked+.slider:before {
+  transform: translateX(23px);
+}
+
+/* Step 3: Add-ons */
+/* Step 4: Summary */
+
+.step-confirmation {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none;
+  }
+}

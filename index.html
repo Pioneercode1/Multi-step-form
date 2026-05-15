@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Frontend Mentor | Multi-step form</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <script src="./assets/js/app.js" defer></script>
+
+</head>
+
+<body>
+
+  <main class="app-container">
+    <!-- Sidebar start -->
+    <nav class="nav-step-container" aria-label="Progress">
+      <picture>
+        <source media="(min-width: 400px)" srcset="./assets/images/bg-sidebar-desktop.svg" height="568px" width="274px">
+        <source media="(max-width: 399px)" srcset="./assets/images/bg-sidebar-mobile.svg">
+        <img src="./assets/images/bg-sidebar-desktop.svg" alt="Sidebar background image" height="568px" width="274px">
+      </picture>
+      <ol class="steps-list" role="list">
+        <li class="step-item" aria-current="step">
+          <span class="step-item-index" aria-current="step">1</span>
+          <span class="step-item-number">step 1 <br><span class="step-item-title">Your info</span></span>
+          
+        </li>
+        <li class="step-item" aria-current="step">
+          <span class="step-item-index">2</span>
+          <span class="step-item-number">step 2 <br><span class="step-item-title">Select plan</span></span>
+          
+        </li>
+        <li class="step-item" aria-current="step">
+          <span class="step-item-index">3</span>
+          <span class="step-item-number">step 3 <br><span class="step-item-title">Add-ons</span></span>
+        </li>
+        <li class="step-item" aria-current="step">
+          <span class="step-item-index">4</span>
+          <span class="step-item-number">step 4 <br><span class="step-item-title">Summary</span></span>
+        </li>
+      </ol>
+    </nav>
+    <!-- Sidebar end -->
+    <!-- ************************** -->
+    <!-- Start form -->
+    <form id="multi-form">
+      <!-- Step 1: Your info -->
+      <section class="step-card active">
+        <fieldset>
+          <legend>Personal info</legend>
+          <p class="p-personal-info">Please provide your name, email address, and phone number.</p>
+
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="e.g. Stephen King" required>
+
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="e.g. stephenking@lorem.com" required>
+
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="e.g. +1 234 567 890" required>
+        </fieldset>
+      </section>
+      <!-- ************************** -->
+      <!-- Step 2: Select plan -->
+      <section class="step-card">
+        <fieldset class="plans-group">
+          <legend class="sr-only">Select your plan</legend>
+          <p class="p-plan-info">You have the option of monthly or yearly billing.</p>
+          <div class="plan-item-container">
+            <!-- plan option arcade -->
+            <div class="plan-item">
+              <input type="radio" id="plan-arcade" name="plan" value="arcade" required checked>
+              <label class="plan-card" for="plan-arcade">
+                <img src="./assets/images/icon-arcade.svg" alt="Arcade plan icon" class="plan-icon">
+                <div class="plan-details">
+                  <span class="plan-name">Arcade</span>
+                  <span class="plan-price" data-monthly="$9/mo" data-yearly="$90/yr">$9/mo</span>
+                </div>
+              </label>
+            </div>
+            <!-- plan option advanced -->
+            <div class="plan-item">
+              <input type="radio" id="plan-advanced" name="plan" value="advanced" required>
+              <label class="plan-card" for="plan-advanced">
+                <img src="./assets/images/icon-advanced.svg" alt="Advanced plan icon" class="plan-icon">
+                <div class="plan-details">
+                  <span class="plan-name">Advanced</span>
+                  <span class="plan-price" data-monthly="$12/mo" data-yearly="$120/yr">$12/mo</span>
+                </div>
+              </label>
+            </div>
+            <!-- plan option pro -->
+            <div class="plan-item">
+              <input type="radio" id="plan-pro" name="plan" value="pro" required>
+              <label class="plan-card" for="plan-pro">
+                <img src="./assets/images/icon-pro.svg" alt="Pro plan icon" class="plan-icon">
+                <div class="plan-details">
+                  <span class="plan-name">Pro</span>
+                  <span class="plan-price" data-monthly="$15/mo" data-yearly="$150/yr">$15/mo</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </fieldset>
+        <!-- billing toggle -->
+        <div class="billing-toggle">
+          <span class="toggle-label monthly active">Monthly</span>
+          <label class="switch" aria-label="Toggle billing cycle">
+            <input type="checkbox" id="billing-cycle">
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-label yearly">Yearly</span>
+        </div>
+      </section>
+      <!-- ************************** -->
+      <!-- Step 3: Add-ons -->
+      <section class="step-card">
+
+        <!-- Step 3 start -->
+
+        Pick add-ons
+        Add-ons help enhance your gaming experience.
+
+        Online service
+        Access to multiplayer games
+        +$1/mo
+
+        Larger storage
+        Extra 1TB of cloud save
+        +$2/mo
+
+        Customizable Profile
+        Custom theme on your profile
+        +$2/mo
+
+        <!-- Step 3 end -->
+      </section>
+      <!-- ************************** -->
+      <!-- Step 4: Summary -->
+      <section class="step-card">
+        <!-- Step 4 start -->
+
+        Finishing up
+        Double-check everything looks OK before confirming.
+
+        <!-- Dynamically add subscription and add-on selections here -->
+
+        Total (per month/year)
+
+        Go Back
+        Confirm
+
+        <!-- Step 4 end -->
+      </section>
+
+      <!-- ************************** -->
+      <!-- footer button -->
+      <footer class="footer-button-container">
+        <button type="button" hidden>Go Back</button>
+        <button type="button">Next Step</button>
+        <button type="submit" hidden>Confirm</button>
+      </footer>
+
+    </form>
+
+    <!-- ************************** -->
+    <!-- Step 5: confirming -->
+    <section class="step-card step-confirmation" hidden>
+      Thank you!
+      Thanks for confirming your subscription! We hope you have fun
+      using our platform. If you ever need support, please feel free
+      to email us at support@loremgaming.com.
+    </section>
+  </main>
+
+</body>
+
+</html>
