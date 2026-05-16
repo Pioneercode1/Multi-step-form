@@ -187,11 +187,20 @@
               looks OK before confirming.</span></legend>
 
           <div class="summary-container">
-            <div class="dynamically-selected-options">
+
+            <div class="dynamically-options-container">
               <!-- Dynamically add subscription and add-on selections here -->
+              <div class="summary-plan-group">
+                <span class="summary-option-title">Arcade (Monthly)<span class="sum-plan">+$9/mo</span></span>
+                <a href="#" class="link-change">Change</a>
+              </div>
+              <div class="summary-plan-group">
+                <span class="summary-option-title">Online service<span class="sum-service">+$1/mo</span></span>
+                <span class="summary-option-title">Larger storage<span class="sum-storage">+$2/mo</span></span>
+              </div>
             </div>
 
-            <div class="total-group">
+            <div class="summary-total-group">
               <span>Total (per month/year):</span>
               <span id="total-price" class="total-price">$0/mo</span>
             </div>
@@ -205,9 +214,9 @@
       <!-- footer button -->
       <footer class="footer-buttons-container" aria-label="Form navigation">
         <div class="buttons-group">
-          <button type="button" id="btn-back" data-back hidden>Go Back</button>
+          <button type="button" id="btn-back" data-back>Go Back</button>
           <button type="button" id="btn-next" data-next>Next Step</button>
-          <button type="submit" id="btn-confirm" data-confirm hidden>Confirm</button>
+          <button type="submit" id="btn-confirm" data-confirm>Confirm</button>
         </div>
       </footer>
 
