@@ -145,7 +145,7 @@ body {
   border-radius: 50%;
 }
 
-.step-item .step-item-index[aria-current="step"] {
+.step-item .step-item-index.step-active {
   background-color: var(--blue-200);
   color: var(--blue-950);
   border-color: var(--blue-200);
