@@ -5,6 +5,7 @@
   --blue-950: hsl(213, 96%, 18%);
   --black: hsla(0, 0%, 0%, 1);
   --blue-300: hsl(228, 100%, 84%);
+
   --blue-200: hsl(206, 94%, 87%);
   --red-500: hsl(354, 84%, 57%);
   /*Colors Neutral*/
@@ -17,6 +18,7 @@
   --light-violet: hsl(230, 75%, 98%);
   --purple-200: hsl(229, 24%, 87%);
   --blue-100: hsl(218, 100%, 97%);
+  --dark-green: hsl(120, 17%, 10%);
   --white: hsl(0, 0%, 100%);
 
   /* Fonts Weights */
@@ -499,25 +501,30 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-block-start: var(--size-xl); /* 2rem */
-  padding-block-end: var(--size-s); /* 1.25rem */
+  padding-block-start: var(--size-xl);
+  /* 2rem */
+  padding-block-end: var(--size-s);
+  /* 1.25rem */
 }
 
 .summary-container .dynamically-options-container {
   display: flex;
   flex-direction: column;
-  gap: var(--size-xl); /* 2rem */
+  gap: var(--size-xl);
+  /* 2rem */
   width: 450px;
   height: 229px;
   background-color: var(--light-violet);
-  padding: var(--font-size-xl); /* 2rem*/
+  padding: var(--font-size-xl);
+  /* 2rem*/
   margin-block-end: var(--size-xl);
 }
 
 .dynamically-options-container .summary-plan-group {
   display: flex;
   flex-direction: column;
-  row-gap: var(--size-ms); /* 8px */
+  row-gap: var(--size-ms);
+  /* 8px */
 }
 
 .dynamically-options-container .summary-plan-group:first-child {
@@ -530,6 +537,7 @@ body {
 .summary-plan-group .link-change {
   color: var(--gray-1);
 }
+
 .summary-plan-group .link-change:hover {
   color: var(--violet-2);
   font-weight: var(--weight-bold);
@@ -541,26 +549,55 @@ body {
   font-weight: var(--weight-bold);
 }
 
-.summary-plan-group .summary-option-title {
+.summary-title {
+  color: var(--blue-950);
+  font-weight: var(--weight-bold);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.summary-option-title:nth-child(1) {
-  color: var(--blue-950);
-  font-weight: var(--weight-bold);
+.summary-plan-group .summary-option-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--grey-500);
+}
+
+.summary-plan-group .summary-option-title:first-child {
+  margin-block-end: var(--font-size-xxs);
 }
 
 
+.summary-option-title .sum-service,
+.summary-option-title .sum-storage {
+  color: var(--dark-green);
+  font-weight: var(--weight-normal);
+}
+
+.summary-container .summary-total-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: var(--font-size-l);
+  color: var(--grey-500);
+}
+
+.summary-container .summary-total-group .total-price {
+  color: var(--violet-2);
+  font-weight: var(--weight-bold);
+  font-size: var(--font-size-l);
+}
+
 /* footer buttons container */
 .footer-buttons-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: var(--size-s);
-  /* 1.5rem */
   width: 100%;
+}
+
+.footer-buttons-container .buttons-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .footer-buttons-container .buttons-group button {
@@ -571,9 +608,21 @@ body {
   /* 8px */
   background-color: var(--blue-950);
   color: var(--white);
-  font-weight: var(--weight-bold);
   font-size: .9rem;
   cursor: pointer;
+}
+
+.footer-buttons-container .buttons-group .btn-back {
+  background-color: transparent;
+  color: var(--gray-1);
+  font-size: var(--font-size-s);
+  font-weight: var(--weight-bold);
+}
+
+.footer-buttons-container .buttons-group .btn-confirm {
+  background-color: var(--violet-2);
+  color: var(--white);
+  font-size: var(--font-size-s);
 }
 
 /* Step 5: Confirmation */
