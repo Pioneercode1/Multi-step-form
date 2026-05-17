@@ -2,6 +2,20 @@
 const multiForm = document.getElementById("multi-form");
 const stepNumber = document.querySelectorAll(".step-item-index");
 const stepCard = document.querySelectorAll(".step-card");
+/* plan selected*/
+const planPriceArcade = document.getElementById("plan-price-arcade");
+const planPriceAdvanced = document.getElementById("plan-price-advanced");
+const planPricePro = document.getElementById("plan-price-pro");
+// plan switch
+const onYearly = document.getElementById("billing-cycle");
+/* addon selected*/
+const addonService = document.getElementById("addon-price-service");
+const addonStorage = document.getElementById("addon-price-storage");
+const addonCustom = document.getElementById("addon-price-storage");
+// addon switch
+const onService = document.getElementById("addon-online-service");
+const onStorage = document.getElementById("addon-larger-storage");
+const onCustom = document.getElementById("addon-customizable-profile");
 /* buttons */
 const btnBack = document.querySelector(".btn-back");
 const btnNext = document.querySelector(".btn-next");
@@ -13,11 +27,12 @@ let currentStep = 0;
 
 
 function updateProgress() {
-    
     stepNumber.forEach((num, index) => {
-        
         num.classList.toggle("step-active", index === currentStep);
     });
+    btnBack.hidden = currentStep === 0;
+    btnNext.hidden = currentStep === stepCard.length - 1;
+    btnConfirm.hidden = currentStep !== stepCard.length - 1;
 }
 
 function updateUI() {

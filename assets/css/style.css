@@ -15,6 +15,7 @@
   --grey-500: hsl(231, 11%, 63%);
   --violet: hsl(243, 31%, 44%);
   --violet-2: hsl(243, 100%, 62%);
+  --vv: hsl(213, 96%, 18%);
   --light-violet: hsl(230, 75%, 98%);
   --purple-200: hsl(229, 24%, 87%);
   --blue-100: hsl(218, 100%, 97%);
@@ -317,13 +318,12 @@ body {
 .plan-icon {
   width: 40px;
   height: 40px;
-  margin-bottom: var(--size-xl);
-  /* 2.5rem */
+  margin-bottom: var(--size-l); /* 1.75 rem */
 }
 
 .plan-name {
   display: block;
-  color: #02295a;
+  color: var(--blue-950);
   font-weight: 700;
   margin-bottom: 4px;
 }
@@ -331,6 +331,12 @@ body {
 .plan-price {
   color: #9699ab;
   font-size: 0.9rem;
+}
+
+.plan-card .data-free {
+  font-size: var(--font-size-xxs); /* .75 rem*/
+  color: var(--blue-950);
+  margin-block-start: 4px;
 }
 
 .billing-toggle {
@@ -356,7 +362,7 @@ body {
 }
 
 .toggle-label.active {
-  color: #02295a;
+  color: var(--blue-950);
 }
 
 .switch {
@@ -380,7 +386,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #02295a;
+  background-color: var(--blue-950);
   transition: .4s;
   border-radius: 34px;
 }
@@ -392,7 +398,7 @@ body {
   width: 10px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--white);
   transition: .4s;
   border-radius: 50%;
 }
