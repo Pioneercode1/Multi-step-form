@@ -7,7 +7,9 @@ const planPriceArcade = document.getElementById("plan-price-arcade");
 const planPriceAdvanced = document.getElementById("plan-price-advanced");
 const planPricePro = document.getElementById("plan-price-pro");
 // plan switch
+const onLabelYearly = document.querySelector(".switch");
 const onYearly = document.getElementById("billing-cycle");
+const freeTwoMonths = document.querySelectorAll(".data-free");
 /* addon selected*/
 const addonService = document.getElementById("addon-price-service");
 const addonStorage = document.getElementById("addon-price-storage");
@@ -68,12 +70,19 @@ multiForm.addEventListener("click", e => {
     }
 });
 
+onYearly.addEventListener("change", () => {
+    if(onYearly) {
+        freeTwoMonths.forEach(span => {
+            span.toggleAttribute("hidden");
+        });
+    }
+});
+
 updateProgress();
 updateUI();
 
 multiForm.addEventListener("submit", event => {
     event.preventDefault();
 });
-
 
 const userInfo = { name: '', email: '', phone: '', address: '', city: '', state: '', zip: '', country: '', cardNumber: '', cardName: '', cardExp: '', cardCVC: '' };
