@@ -76,12 +76,12 @@
           <div class="plan-item-container">
             <!-- plan option arcade -->
             <div class="plan-item">
-              <input type="radio" id="plan-arcade" name="plan" value="arcade" required checked>
+              <input type="radio" id="plan-arcade" name="plan" value="arcade"  plan-option="" data-monthly="$9/mo" data-yearly="$90/yr" required>
               <label class="plan-card" for="plan-arcade" isActive="false" isDetailed="false"
                 aria-label="Select Arcade plan, $9 per month or $90 per year">
                 <img src="./assets/images/icon-arcade.svg" alt="Arcade plan icon" class="plan-icon">
                 <div class="plan-details">
-                  <span class="plan-name">Arcade</span>
+                  <span class="plan-name" arcade="Arcade">Arcade</span>
                   <span id="plan-price-arcade" class="plan-price" data-monthly="$9/mo" data-yearly="$90/yr">$9/mo</span>
                 </div>
                 <span class="data-free" data-free="2 months free" hidden>2 months free</span>
@@ -89,11 +89,11 @@
             </div>
             <!-- plan option advanced -->
             <div class="plan-item">
-              <input type="radio" id="plan-advanced" name="plan" value="advanced" required>
+              <input type="radio" id="plan-advanced" name="plan" value="advanced" plan-option="" data-monthly="$12/mo" data-yearly="$120/yr" required>
               <label class="plan-card" for="plan-advanced">
                 <img src="./assets/images/icon-advanced.svg" alt="Advanced plan icon" class="plan-icon">
                 <div class="plan-details">
-                  <span class="plan-name">Advanced</span>
+                  <span class="plan-name" advanced="Advanced">Advanced</span>
                   <span id="plan-price-advanced" class="plan-price" data-monthly="$12/mo" data-yearly="$120/yr">$12/mo</span>
                 </div>
                 <span class="data-free" data-free="2 months free" hidden>2 months free</span>
@@ -101,11 +101,11 @@
             </div>
             <!-- plan option pro -->
             <div class="plan-item">
-              <input type="radio" id="plan-pro" name="plan" value="pro" required>
+              <input type="radio" id="plan-pro" name="plan" value="pro" plan-option="" data-monthly="$15/mo" data-yearly="$150/yr" required>
               <label class="plan-card" for="plan-pro">
                 <img src="./assets/images/icon-pro.svg" alt="Pro plan icon" class="plan-icon">
                 <div class="plan-details">
-                  <span class="plan-name">Pro</span>
+                  <span class="plan-name" pro="Pro">Pro</span>
                   <span id="plan-price-pro" class="plan-price" data-monthly="$15/mo" data-yearly="$150/yr">$15/mo</span>
                 </div>
                 <span class="data-free" data-free="2 months free" hidden>2 months free</span>
@@ -115,9 +115,9 @@
         </fieldset>
         <!-- billing toggle -->
         <div class="billing-toggle">
-          <span class="toggle-label monthly active">Monthly</span>
+          <span class="toggle-label monthly active-time">Monthly</span>
 
-          <label class="switch" for="billing-cycle" aria-label="Toggle billing cycle">
+          <label class="switch" for="billing-cycle" aria-label="Toggle billing cycle" data-valid>
             <input type="checkbox" id="billing-cycle">
             <span class="slider"></span>
           </label>
@@ -136,7 +136,7 @@
           <div class="addons-item-container">
             <!-- add-on option online service -->
             <div class="addon-item">
-              <input type="checkbox" id="addon-online-service" name="addon" value="online-service">
+              <input type="checkbox" id="addon-online-service" name="addon" value="online-service" addon-option="" data-monthly="$1/mo" data-yearly="$10/yr">
 
               <label class="addon-card" for="addon-online-service"
                 aria-label="Select Online Service add-on, $1 per month or $10 per year">
@@ -153,7 +153,7 @@
 
             <!-- add-on option larger storage -->
             <div class="addon-item">
-              <input type="checkbox" id="addon-larger-storage" name="addon" value="larger-storage">
+              <input type="checkbox" id="addon-larger-storage" name="addon" value="larger-storage" addon-option="" data-monthly="$2/mo" data-yearly="$20/yr">
               <label class="addon-card" for="addon-larger-storage"
                 aria-label="Select Larger Storage add-on, $2 per month or $20 per year">
                 <div class="addon-details">
@@ -166,7 +166,7 @@
 
             <!-- add-on option customizable profile -->
             <div class="addon-item">
-              <input type="checkbox" id="addon-customizable-profile" name="addon" value="customizable-profile">
+              <input type="checkbox" id="addon-customizable-profile" name="addon" value="customizable-profile" addon-option="" data-monthly="$2/mo" data-yearly="$20/yr">
               <label class="addon-card" for="addon-customizable-profile"
                 aria-label="Select Customizable Profile add-on, $2 per month or $20 per year">
                 <div class="addon-details">
@@ -193,13 +193,11 @@
 
             <div class="dynamically-options-container">
               <!-- Dynamically add subscription and add-on selections here -->
-              <div class="summary-plan-group">
-                <span class="summary-title">Arcade (Monthly)<span class="sum-plan">+$9/mo</span></span>
+              <div class="summary-plan-group plan-title-group">
+                <span class="summary-plan-title"><span class="plan-price"></span></span>
                 <a href="#" class="link-change">Change</a>
               </div>
-              <div class="summary-plan-group">
-                <span class="summary-option-title">Online service<span class="sum-service">+$1/mo</span></span>
-                <span class="summary-option-title">Larger storage<span class="sum-storage">+$2/mo</span></span>
+              <div class="summary-plan-group summary-option">
               </div>
             </div>
 

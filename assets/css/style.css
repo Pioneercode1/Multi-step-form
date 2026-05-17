@@ -361,7 +361,7 @@ body {
   transition: color 0.3s ease;
 }
 
-.toggle-label.active {
+.toggle-label.active-time {
   color: var(--blue-950);
 }
 
@@ -555,7 +555,7 @@ body {
   font-weight: var(--weight-bold);
 }
 
-.summary-title {
+.summary-plan-title {
   color: var(--blue-950);
   font-weight: var(--weight-bold);
   display: flex;
@@ -570,13 +570,7 @@ body {
   color: var(--grey-500);
 }
 
-.summary-plan-group .summary-option-title:first-child {
-  margin-block-end: var(--font-size-xxs);
-}
-
-
-.summary-option-title .sum-service,
-.summary-option-title .sum-storage {
+.summary-option-title .option-price {
   color: var(--dark-green);
   font-weight: var(--weight-normal);
 }
