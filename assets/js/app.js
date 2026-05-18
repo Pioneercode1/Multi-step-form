@@ -12,19 +12,14 @@ const onYearly = document.getElementById("billing-cycle");
 const freeTwoMonths = document.querySelectorAll(".data-free");
 const monthlyActive = document.querySelector(".monthly");
 const yearlyActive = document.querySelector(".yearly");
-/* addon selected*/
+/* pick add ons selected*/
 const addonService = document.getElementById("addon-price-service");
 const addonStorage = document.getElementById("addon-price-storage");
-const addonCustom = document.getElementById("addon-price-storage");
+const addonCustom = document.getElementById("addon-price-custom");
 // addon switch
 const onService = document.getElementById("addon-online-service");
 const onStorage = document.getElementById("addon-larger-storage");
 const onCustom = document.getElementById("addon-customizable-profile");
-/* buttons */
-const btnBack = document.querySelector(".btn-back");
-const btnNext = document.querySelector(".btn-next");
-const btnConfirm = document.querySelector(".btn-confirm");
-const stepConfirmation = document.querySelector(".step-confirmation");
 /* summary */
 const planItemContainer = document.querySelectorAll("[plan-option]");
 const summaryTitleGroup = document.querySelector(".plan-title-group")
@@ -32,8 +27,54 @@ const summaryTitleGroup = document.querySelector(".plan-title-group")
 const optionContainer = document.querySelectorAll("[addon-option]");
 const summaryOptionGroup = document.querySelector(".summary-option");
 const totalPrice = document.querySelector(".total-price");
+/* buttons */
+const btnBack = document.querySelector(".btn-back");
+const btnNext = document.querySelector(".btn-next");
+const btnConfirm = document.querySelector(".btn-confirm");
+const stepConfirmation = document.querySelector(".step-confirmation");
 /**/
 
+/* create Summary Plan */
+function createSummaryPlan(valuePlanTitle, valuePlanPrice) {
+    const planTitle = document.createElement("span");
+    planTitle.classList.add("summary-plan-title");
+    const summaryPlanPrice = document.createElement("span");
+    summaryPlanPrice.classList.add("plan-price");
+    //
+    const newValuePlanTitle = document.createTextNode(valuePlanTitle);
+    const newValuePlanPrice = document.createTextNode(valuePlanPrice);
+    //
+    planTitle.appendChild(newValuePlanTitle);
+    summaryPlanPrice.appendChild(newValuePlanPrice);
+
+    //
+    planTitle.appendChild(summaryPlanPrice);
+    summaryTitleGroup.innerHTML = "";
+    summaryTitleGroup.append(planTitle);
+}
+
+for (let plan = 0; plan < planItemContainer.length; plan++) {
+    const element = planItemContainer[plan];
+    element.addEventListener("click", e => {
+        if (!e.target.getAttribute("e.target")) {
+            for (const key of planItemContainer) {
+                key.removeAttribute("checked");
+            }
+            e.target.setAttribute("checked", "");
+            const valuePlanTitle = e.target.value;
+            let valuePlanPrice;
+            if (onYearly) {
+                valuePlanPrice = e.target.getAttribute("data-yearly");
+            }
+            if (onYearly) {
+                valuePlanPrice = e.target.getAttribute("data-monthly");
+            }
+            createSummaryPlan(valuePlanTitle, valuePlanPrice);
+        }
+    });
+}
+
+/* create Summary Options */
 function createSummaryOptions(valueOptionTitle, valueOptionPrice) {
     const summaryOptionTitle = document.createElement("span");
     summaryOptionTitle.classList.add("summary-option-title");
@@ -47,70 +88,83 @@ function createSummaryOptions(valueOptionTitle, valueOptionPrice) {
     summaryOptionPrice.appendChild(newValueOptionPrice);
     //
     summaryOptionTitle.appendChild(summaryOptionPrice);
-    summaryOptionGroup.innerHTML = "";
     summaryOptionGroup.append(summaryOptionTitle);
 }
 
-function createSummaryPlan(valuePlanTitle, valuePlanPrice) {
-    const planTitle = document.createElement("span");
-    planTitle.classList.add("summary-plan-title");
-    const summaryPlanPrice = document.createElement("span");
-    summaryPlanPrice.classList.add("plan-price");
-    //
-    newValuePlanTitle = document.createTextNode(valuePlanTitle);
-    newValuePlanPrice = document.createTextNode(valuePlanPrice);
-    //
-    planTitle.appendChild(newValuePlanTitle);
-    summaryPlanPrice.appendChild(newValuePlanPrice);
-
-    //
-    planTitle.appendChild(summaryPlanPrice);
-    summaryTitleGroup.innerHTML = "";
-    summaryTitleGroup.append(planTitle);
-}
-
-/* create Summary Plan */
-for (let plan = 0; plan < planItemContainer.length; plan++) {
-    const element = planItemContainer[plan];
+function updateSummaryOptions() {
+    for (let plan = 0; plan < optionContainer.length; plan++) {
+        const element = optionContainer[plan];
         element.addEventListener("click", e => {
-            let valuePlanPrice ="";
+            let valueOptionPrice = "";
             if (!e.target.getAttribute("e.target")) {
-                for (const key of planItemContainer) {
+                for (const key of optionContainer) {
                     key.removeAttribute("checked");
                 }
                 e.target.setAttribute("checked", "");
-                const valuePlanTitle = e.target.value;
-                if (onYearly) {
-                    valuePlanPrice = e.target.getAttribute("data-yearly");
-                } else {
-                    valuePlanPrice = e.target.getAttribute("data-monthly");
-                }
-                createSummaryPlan(valuePlanTitle, valuePlanPrice);
+                const valueOptionTitle = e.target.value;
+                let valueOptionPrice;
+                createSummaryOptions(valueOptionTitle, valueOptionPrice);
             }
-        });
-}
-
-/* create Summary Options */
-for (let plan = 0; plan < optionContainer.length; plan++) {
-    const element = optionContainer[plan];
-    element.addEventListener("click", e => {
-        let valueOptionPrice = "";
-        if (!e.target.getAttribute("e.target")) {
-            for (const key of optionContainer) {
-                key.removeAttribute("checked");
-            }
-            e.target.setAttribute("checked", "");
-            const valueOptionTitle = e.target.value;
-            //const valueOptionPrice = "";
             if (onYearly) {
                 valueOptionPrice = e.target.getAttribute("data-yearly");
             } else {
                 valueOptionPrice = e.target.getAttribute("data-monthly");
             }
-            createSummaryOptions(valueOptionTitle, valueOptionPrice);
-        }
-    });
+        });
+    }
 }
+
+updateSummaryOptions();
+
+function funValidYear() {
+    // pick add price
+    addonService.innerText = addonService.getAttribute("data-yearly");
+    addonStorage.innerText = addonStorage.getAttribute("data-yearly");
+    addonCustom.innerText = addonCustom.getAttribute("data-yearly");
+
+    yearlyActive.classList.add("active-time");
+    monthlyActive.classList.remove("active-time");
+
+    // summary finishing
+    planPriceArcade.innerText = planPriceArcade.getAttribute("data-yearly");
+    planPriceAdvanced.innerText = planPriceAdvanced.getAttribute("data-yearly");
+    planPricePro.innerText = planPricePro.getAttribute("data-yearly");
+
+    yearlyActive.classList.add("active-time");
+    monthlyActive.classList.remove("active-time");
+}
+
+function funNotValidYear() {
+    // pick add price
+    addonService.innerText = addonService.getAttribute("data-monthly");
+    addonStorage.innerText = addonStorage.getAttribute("data-monthly");
+    addonCustom.innerText = addonCustom.getAttribute("data-monthly");
+
+    monthlyActive.classList.add("active-time");
+    yearlyActive.classList.remove("active-time");
+    // summary finishing
+    planPriceArcade.innerText = planPriceArcade.getAttribute("data-monthly");
+    planPriceAdvanced.innerText = planPriceAdvanced.getAttribute("data-monthly");
+    planPricePro.innerText = planPricePro.getAttribute("data-monthly");
+
+    monthlyActive.classList.add("active-time");
+    yearlyActive.classList.remove("active-time");
+}
+// select your plan
+onYearly.addEventListener("click", () => {
+    if (onYearly) {
+        freeTwoMonths.forEach(span => {
+            span.toggleAttribute("hidden");
+        });
+        const validYear = onLabelYearly.toggleAttribute("data-valid");
+        if (!validYear) {
+            funValidYear();
+        } else if (validYear) {
+            funNotValidYear();
+        }
+    }
+
+});
 //
 
 let currentStep = 0;
@@ -158,31 +212,6 @@ multiForm.addEventListener("click", e => {
     }
 });
 
-// select your plan
-onYearly.addEventListener("click", () => {
-    if (onYearly) {
-        freeTwoMonths.forEach(span => {
-            span.toggleAttribute("hidden");
-        });
-
-        const validYear = onLabelYearly.toggleAttribute("data-valid");
-
-        if (!validYear) {
-            planPriceArcade.innerText = planPriceArcade.getAttribute("data-yearly");
-            planPriceAdvanced.innerText = planPriceAdvanced.getAttribute("data-yearly");
-            planPricePro.innerText = planPricePro.getAttribute("data-yearly");
-            monthlyActive.classList.toggle("active-time");
-            yearlyActive.classList.toggle("active-time");
-        } else if (validYear) {
-            planPriceArcade.innerText = planPriceArcade.getAttribute("data-monthly");
-            planPriceAdvanced.innerText = planPriceAdvanced.getAttribute("data-monthly");
-            planPricePro.innerText = planPricePro.getAttribute("data-monthly");
-            monthlyActive.classList.toggle("active-time");
-            yearlyActive.classList.toggle("active-time");
-        }
-    }
-});
-
 // update form
 updateProgress();
 updateUI();
@@ -191,4 +220,4 @@ multiForm.addEventListener("submit", event => {
     event.preventDefault();
 });
 
-const userInfo = { name: '', email: '', phone: '', address: '', city: '', state: '', zip: '', country: '', cardNumber: '', cardName: '', cardExp: '', cardCVC: '' };
+//const userInfo = { name: '', email: '', phone: '', address: '', city: '', state: '', zip: '', country: '', cardNumber: '', cardName: '', cardExp: '', cardCVC: '' };
