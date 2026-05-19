@@ -77,7 +77,7 @@
             <!-- plan option arcade -->
             <div class="plan-item">
               <input type="radio" id="plan-arcade" name="plan" value="arcade"  plan-option="" data-monthly="$9/mo" data-yearly="$90/yr" required>
-              <label class="plan-card" for="plan-arcade" isActive="false" isDetailed="false"
+              <label class="plan-card" for="plan-arcade" value="arcade" isActive="false" isDetailed="false"
                 aria-label="Select Arcade plan, $9 per month or $90 per year">
                 <img src="./assets/images/icon-arcade.svg" alt="Arcade plan icon" class="plan-icon">
                 <div class="plan-details">
@@ -117,7 +117,7 @@
         <div class="billing-toggle">
           <span class="toggle-label monthly active-time">Monthly</span>
 
-          <label class="switch" for="billing-cycle" aria-label="Toggle billing cycle" data-valid>
+          <label class="switch" for="billing-cycle" aria-label="Toggle billing cycle">
             <input type="checkbox" id="billing-cycle">
             <span class="slider"></span>
           </label>
@@ -194,7 +194,7 @@
             <div class="dynamically-options-container">
               <!-- Dynamically add subscription and add-on selections here -->
               <div class="summary-plan-group plan-title-group">
-                <span class="summary-plan-title"><span class="plan-price"></span></span>
+                <!-- <span class="summary-plan-title"><span class="plan-price"></span></span> -->
                 <a href="#" class="link-change">Change</a>
               </div>
               <div class="summary-plan-group summary-option">

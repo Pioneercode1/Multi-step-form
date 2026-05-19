@@ -7,7 +7,7 @@ const planPriceArcade = document.getElementById("plan-price-arcade");
 const planPriceAdvanced = document.getElementById("plan-price-advanced");
 const planPricePro = document.getElementById("plan-price-pro");
 // plan switch
-const onLabelYearly = document.querySelector(".switch");
+//const onLabelYearly = document.querySelector(".switch");
 const onYearly = document.getElementById("billing-cycle");
 const freeTwoMonths = document.querySelectorAll(".data-free");
 const monthlyActive = document.querySelector(".monthly");
@@ -33,6 +33,80 @@ const btnNext = document.querySelector(".btn-next");
 const btnConfirm = document.querySelector(".btn-confirm");
 const stepConfirmation = document.querySelector(".step-confirmation");
 /**/
+//
+
+let currentStep = 0;
+
+function updateProgress() {
+    stepNumber.forEach((num, index) => {
+        num.classList.toggle("step-active", index === currentStep);
+    });
+    btnBack.hidden = currentStep === 0;
+    btnNext.hidden = currentStep === stepCard.length - 1;
+    btnConfirm.hidden = currentStep !== stepCard.length - 1;
+}
+
+function updateUI() {
+    stepCard.forEach((step, index) => {
+        step.classList.toggle("active", index === currentStep);
+    });
+}
+
+multiForm.addEventListener("click", e => {
+    const target = e.target;
+    let onValid = onYearly.checked;
+    let inputs = stepCard[currentStep].querySelectorAll("input");
+    let valid = [...inputs].every(input => {
+        return input.checkValidity();
+    });
+
+    //
+    if (target.matches("[data-next]")) {
+        if (currentStep < stepCard.length - 1) {
+            if (!valid) {
+                inputs.forEach(input => {
+                    input.reportValidity();
+                });
+            }
+        }
+        currentStep++;
+        updateProgress();
+        updateUI();
+
+    } else if (target.matches("[data-back]")) {
+        if (currentStep > 0) {
+            currentStep--;
+            updateProgress();
+            updateUI();
+        }
+    }
+    if (target.type === "radio") {
+        currentUserInfo[1].value = target.value;
+        if (onValid) {
+            currentUserInfo[1].data = target.getAttribute("data-yearly");
+        } else {
+            currentUserInfo[1].data = target.getAttribute("data-monthly");
+        }
+        console.log(currentUserInfo[1]);
+    }
+});
+
+//multiForm.addEventListener("change", e => {});
+
+// update form
+updateProgress();
+updateUI();
+
+// select your plan
+onYearly.addEventListener("click", (e) => {
+    let onValid = onYearly.checked;
+    if (onYearly) {
+        freeTwoMonths.forEach(span => {
+            span.toggleAttribute("hidden");
+        });
+    }
+    
+});
 
 /* create Summary Plan */
 function createSummaryPlan(valuePlanTitle, valuePlanPrice) {
@@ -49,31 +123,12 @@ function createSummaryPlan(valuePlanTitle, valuePlanPrice) {
 
     //
     planTitle.appendChild(summaryPlanPrice);
-    summaryTitleGroup.innerHTML = "";
     summaryTitleGroup.append(planTitle);
 }
 
-for (let plan = 0; plan < planItemContainer.length; plan++) {
-    const element = planItemContainer[plan];
-    element.addEventListener("click", e => {
-        if (!e.target.getAttribute("e.target")) {
-            for (const key of planItemContainer) {
-                key.removeAttribute("checked");
-            }
-            e.target.setAttribute("checked", "");
-            const valuePlanTitle = e.target.value;
-            let valuePlanPrice;
-            if (onYearly) {
-                valuePlanPrice = e.target.getAttribute("data-yearly");
-            }
-            if (onYearly) {
-                valuePlanPrice = e.target.getAttribute("data-monthly");
-            }
-            createSummaryPlan(valuePlanTitle, valuePlanPrice);
-        }
-    });
+function updateSummaryPlan() {
+    createSummaryPlan(valuePlanTitle, valuePlanPrice);
 }
-
 /* create Summary Options */
 function createSummaryOptions(valueOptionTitle, valueOptionPrice) {
     const summaryOptionTitle = document.createElement("span");
@@ -92,132 +147,19 @@ function createSummaryOptions(valueOptionTitle, valueOptionPrice) {
 }
 
 function updateSummaryOptions() {
-    for (let plan = 0; plan < optionContainer.length; plan++) {
-        const element = optionContainer[plan];
-        element.addEventListener("click", e => {
-            let valueOptionPrice = "";
-            if (!e.target.getAttribute("e.target")) {
-                for (const key of optionContainer) {
-                    key.removeAttribute("checked");
-                }
-                e.target.setAttribute("checked", "");
-                const valueOptionTitle = e.target.value;
-                let valueOptionPrice;
-                createSummaryOptions(valueOptionTitle, valueOptionPrice);
-            }
-            if (onYearly) {
-                valueOptionPrice = e.target.getAttribute("data-yearly");
-            } else {
-                valueOptionPrice = e.target.getAttribute("data-monthly");
-            }
-        });
-    }
+    createSummaryOptions(valueOptionTitle, valueOptionPrice);
 }
 
-updateSummaryOptions();
+const currentUserInfo = [
+    { userInfo: { name: '', email: '', phone: '' } },
+    { selectPlan: { value: '', checked: '', data: '' } },
+    { pickAddons: { service: { value: '', checked: '', data: '' }, storage: { value: '', checked: '', data: '' }, custom: { value: '', checked: '', data: '' } }, },
+];
 
-function funValidYear() {
-    // pick add price
-    addonService.innerText = addonService.getAttribute("data-yearly");
-    addonStorage.innerText = addonStorage.getAttribute("data-yearly");
-    addonCustom.innerText = addonCustom.getAttribute("data-yearly");
-
-    yearlyActive.classList.add("active-time");
-    monthlyActive.classList.remove("active-time");
-
-    // summary finishing
-    planPriceArcade.innerText = planPriceArcade.getAttribute("data-yearly");
-    planPriceAdvanced.innerText = planPriceAdvanced.getAttribute("data-yearly");
-    planPricePro.innerText = planPricePro.getAttribute("data-yearly");
-
-    yearlyActive.classList.add("active-time");
-    monthlyActive.classList.remove("active-time");
-}
-
-function funNotValidYear() {
-    // pick add price
-    addonService.innerText = addonService.getAttribute("data-monthly");
-    addonStorage.innerText = addonStorage.getAttribute("data-monthly");
-    addonCustom.innerText = addonCustom.getAttribute("data-monthly");
-
-    monthlyActive.classList.add("active-time");
-    yearlyActive.classList.remove("active-time");
-    // summary finishing
-    planPriceArcade.innerText = planPriceArcade.getAttribute("data-monthly");
-    planPriceAdvanced.innerText = planPriceAdvanced.getAttribute("data-monthly");
-    planPricePro.innerText = planPricePro.getAttribute("data-monthly");
-
-    monthlyActive.classList.add("active-time");
-    yearlyActive.classList.remove("active-time");
-}
-// select your plan
-onYearly.addEventListener("click", () => {
-    if (onYearly) {
-        freeTwoMonths.forEach(span => {
-            span.toggleAttribute("hidden");
-        });
-        const validYear = onLabelYearly.toggleAttribute("data-valid");
-        if (!validYear) {
-            funValidYear();
-        } else if (validYear) {
-            funNotValidYear();
-        }
-    }
-
-});
-//
-
-let currentStep = 0;
-
-
-function updateProgress() {
-    stepNumber.forEach((num, index) => {
-        num.classList.toggle("step-active", index === currentStep);
-    });
-    btnBack.hidden = currentStep === 0;
-    btnNext.hidden = currentStep === stepCard.length - 1;
-    btnConfirm.hidden = currentStep !== stepCard.length - 1;
-}
-
-function updateUI() {
-    stepCard.forEach((step, index) => {
-        step.classList.toggle("active", index === currentStep);
-    });
-}
-
-multiForm.addEventListener("click", e => {
-    let inputs = stepCard[currentStep].querySelectorAll("input");
-    let valid = [...inputs].every(input => {
-        return input.checkValidity();
-    });
-    //
-    if (e.target.matches("[data-next]")) {
-        if (currentStep < stepCard.length - 1) {
-            if (!valid) {
-                inputs.forEach(input => {
-                    input.reportValidity();
-                });
-            }
-        }
-        currentStep++;
-        updateProgress();
-        updateUI();
-
-    } else if (e.target.matches("[data-back]")) {
-        if (currentStep > 0) {
-            currentStep--;
-            updateProgress();
-            updateUI();
-        }
-    }
-});
-
-// update form
-updateProgress();
-updateUI();
+//updateSummaryPlan();
+//updateSummaryOptions();
 
 multiForm.addEventListener("submit", event => {
     event.preventDefault();
 });
 
-//const userInfo = { name: '', email: '', phone: '', address: '', city: '', state: '', zip: '', country: '', cardNumber: '', cardName: '', cardExp: '', cardCVC: '' };
