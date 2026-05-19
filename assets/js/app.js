@@ -1,165 +1,292 @@
-/* elements */
 const multiForm = document.getElementById("multi-form");
-const stepNumber = document.querySelectorAll(".step-item-index");
-const stepCard = document.querySelectorAll(".step-card");
-/* plan selected*/
-const planPriceArcade = document.getElementById("plan-price-arcade");
-const planPriceAdvanced = document.getElementById("plan-price-advanced");
-const planPricePro = document.getElementById("plan-price-pro");
-// plan switch
-//const onLabelYearly = document.querySelector(".switch");
-const onYearly = document.getElementById("billing-cycle");
-const freeTwoMonths = document.querySelectorAll(".data-free");
-const monthlyActive = document.querySelector(".monthly");
-const yearlyActive = document.querySelector(".yearly");
-/* pick add ons selected*/
-const addonService = document.getElementById("addon-price-service");
-const addonStorage = document.getElementById("addon-price-storage");
-const addonCustom = document.getElementById("addon-price-custom");
-// addon switch
-const onService = document.getElementById("addon-online-service");
-const onStorage = document.getElementById("addon-larger-storage");
-const onCustom = document.getElementById("addon-customizable-profile");
-/* summary */
-const planItemContainer = document.querySelectorAll("[plan-option]");
-const summaryTitleGroup = document.querySelector(".plan-title-group")
-//
-const optionContainer = document.querySelectorAll("[addon-option]");
-const summaryOptionGroup = document.querySelector(".summary-option");
-const totalPrice = document.querySelector(".total-price");
+const stepCards = Array.from(document.querySelectorAll(".step-card"));
+const stepIndicators = Array.from(document.querySelectorAll(".step-item-index"));
+const stepItems = Array.from(document.querySelectorAll(".step-item"));
 /* buttons */
 const btnBack = document.querySelector(".btn-back");
 const btnNext = document.querySelector(".btn-next");
 const btnConfirm = document.querySelector(".btn-confirm");
-const stepConfirmation = document.querySelector(".step-confirmation");
-/**/
-//
+const billingToggle = document.getElementById("billing-cycle");
+/* plan */
+const monthlyLabel = document.querySelector(".monthly");
+const yearlyLabel = document.querySelector(".yearly");
+const freeLabels = Array.from(document.querySelectorAll(".data-free"));
+const dataPer = document.getElementById("data-per");
+const totalPrice = document.getElementById("total-price");
+const summaryTitleGroup = document.querySelector(".plan-title-group");
+const summaryOptionGroup = document.querySelector(".summary-option");
+const confirmation = document.querySelector(".step-confirmation");
+const nav = document.querySelector(".nav-step-container");
 
-let currentStep = 0;
+const planOptions = Array.from(document.querySelectorAll(".plan-item")).map((item) => ({
+    item,
+    input: item.querySelector('input[type="radio"]'),
+    name: item.querySelector(".plan-name"),
+    price: item.querySelector(".plan-price"),
+    free: item.querySelector(".data-free"),
+}));
 
-function updateProgress() {
-    stepNumber.forEach((num, index) => {
-        num.classList.toggle("step-active", index === currentStep);
-    });
-    btnBack.hidden = currentStep === 0;
-    btnNext.hidden = currentStep === stepCard.length - 1;
-    btnConfirm.hidden = currentStep !== stepCard.length - 1;
+const addonOptions = Array.from(document.querySelectorAll(".addon-item")).map((item) => ({
+    item,
+    input: item.querySelector('input[type="checkbox"]'),
+    name: item.querySelector(".addon-name"),
+    price: item.querySelector(".addon-price"),
+}));
+
+const state = {
+    step: 0,
+    billingCycle: billingToggle.checked ? "yearly" : "monthly",
+    personal: {
+        name: "",
+        email: "",
+        phone: "",
+    },
+    plan: "",
+    addons: [],
+};
+
+function priceNumber(text) {
+    const match = String(text).match(/\d+/);
+    return match ? Number(match[0]) : 0;
 }
 
-function updateUI() {
-    stepCard.forEach((step, index) => {
-        step.classList.toggle("active", index === currentStep);
-    });
+function getSelectedPlanOption() {
+    const selectedInput = multiForm.querySelector('input[name="plan"]:checked');
+    if (!selectedInput) return null;
+    return planOptions.find((option) => option.input === selectedInput) ?? null;
 }
 
-multiForm.addEventListener("click", e => {
-    const target = e.target;
-    let onValid = onYearly.checked;
-    let inputs = stepCard[currentStep].querySelectorAll("input");
-    let valid = [...inputs].every(input => {
-        return input.checkValidity();
+function getSelectedAddons() {
+    return addonOptions.filter((option) => option.input.checked);
+}
+
+function updateStepIndicators() {
+    stepIndicators.forEach((indicator, index) => {
+        indicator.classList.toggle("step-active", index === state.step);
     });
 
-    //
-    if (target.matches("[data-next]")) {
-        if (currentStep < stepCard.length - 1) {
-            if (!valid) {
-                inputs.forEach(input => {
-                    input.reportValidity();
-                });
-            }
-        }
-        currentStep++;
-        updateProgress();
-        updateUI();
-
-    } else if (target.matches("[data-back]")) {
-        if (currentStep > 0) {
-            currentStep--;
-            updateProgress();
-            updateUI();
-        }
-    }
-    if (target.type === "radio") {
-        currentUserInfo[1].value = target.value;
-        if (onValid) {
-            currentUserInfo[1].data = target.getAttribute("data-yearly");
+    stepItems.forEach((item, index) => {
+        if (index === state.step) {
+            item.setAttribute("aria-current", "step");
         } else {
-            currentUserInfo[1].data = target.getAttribute("data-monthly");
+            item.removeAttribute("aria-current");
         }
-        console.log(currentUserInfo[1]);
+    });
+}
+
+function updateButtons() {
+    btnBack.hidden = state.step === 0;
+    btnNext.hidden = state.step === stepCards.length - 1;
+    btnConfirm.hidden = state.step !== stepCards.length - 1;
+}
+
+function showStep(stepIndex) {
+    state.step = stepIndex;
+    stepCards.forEach((card, index) => {
+        card.classList.toggle("active", index === stepIndex);
+    });
+    updateStepIndicators();
+    updateButtons();
+
+    if (stepIndex === 3) {
+        renderSummary();
     }
-});
+}
 
-//multiForm.addEventListener("change", e => {});
+function validateCurrentStep() {
+    const currentCard = stepCards[state.step];
+    const requiredControls = Array.from(currentCard.querySelectorAll("input, select, textarea"));
 
-// update form
-updateProgress();
-updateUI();
+    if (state.step === 1) {
+        const selectedPlan = currentCard.querySelector('input[name="plan"]:checked');
+        if (!selectedPlan) {
+            const firstRadio = currentCard.querySelector('input[name="plan"]');
+            firstRadio?.reportValidity();
+            return false;
+        }
+        return true;
+    }
 
-// select your plan
-onYearly.addEventListener("click", (e) => {
-    let onValid = onYearly.checked;
-    if (onYearly) {
-        freeTwoMonths.forEach(span => {
-            span.toggleAttribute("hidden");
+    const invalidControl = requiredControls.find((control) => !control.checkValidity());
+    if (invalidControl) {
+        invalidControl.reportValidity();
+        return false;
+    }
+
+    return true;
+}
+
+function syncPersonalState() {
+    state.personal.name = document.getElementById("name").value.trim();
+    state.personal.email = document.getElementById("email").value.trim();
+    state.personal.phone = document.getElementById("phone").value.trim();
+}
+
+function syncPlanState() {
+    const selectedPlan = getSelectedPlanOption();
+    if (!selectedPlan) {
+        state.plan = "";
+        return;
+    }
+
+    state.plan = selectedPlan.input.value;
+}
+
+function syncAddonState() {
+    state.addons = getSelectedAddons().map((option) => option.input.value);
+}
+
+function updateBillingUI() {
+    const isYearly = state.billingCycle === "yearly";
+
+    monthlyLabel.classList.toggle("active-time", !isYearly);
+    yearlyLabel.classList.toggle("active-time", isYearly);
+
+    freeLabels.forEach((label) => {
+        label.hidden = !isYearly;
+    });
+
+    planOptions.forEach((option) => {
+        option.price.textContent = option.price.dataset[state.billingCycle];
+    });
+
+    addonOptions.forEach((option) => {
+        option.price.textContent = option.price.dataset[state.billingCycle];
+    });
+
+    dataPer.textContent = isYearly ? "(per year)" : "(per month)";
+}
+
+function renderSummary() {
+    const selectedPlan = getSelectedPlanOption();
+    const selectedAddons = getSelectedAddons();
+    const cycleLabel = state.billingCycle === "yearly" ? "Yearly" : "Monthly";
+
+    const planName = selectedPlan ? selectedPlan.name.textContent.trim() : "No plan selected";
+    const planPriceText = selectedPlan ? selectedPlan.price.dataset[state.billingCycle] : "$0/mo";
+
+    summaryTitleGroup.innerHTML = `
+    <div class="summary-plan-title">
+      <span>${planName} (${cycleLabel})</span>
+      <span class="plan-price">${planPriceText}</span>
+    </div>
+    <a href="#" class="link-change">Change</a>
+  `;
+
+    summaryOptionGroup.innerHTML = "";
+
+    let total = selectedPlan ? priceNumber(selectedPlan.price.dataset[state.billingCycle]) : 0;
+
+    if (selectedAddons.length === 0) {
+        const emptyRow = document.createElement("span");
+        emptyRow.className = "summary-option-title";
+        emptyRow.textContent = "No add-ons selected";
+        summaryOptionGroup.append(emptyRow);
+    } else {
+        selectedAddons.forEach((option) => {
+            const row = document.createElement("span");
+            row.className = "summary-option-title";
+
+            const addonName = document.createElement("span");
+            addonName.textContent = option.name.textContent.trim();
+
+            const addonPrice = document.createElement("span");
+            addonPrice.className = "option-price";
+            addonPrice.textContent = `+${option.price.dataset[state.billingCycle]}`;
+
+            row.append(addonName, addonPrice);
+            summaryOptionGroup.append(row);
+
+            total += priceNumber(option.price.dataset[state.billingCycle]);
         });
     }
-    
-});
 
-/* create Summary Plan */
-function createSummaryPlan(valuePlanTitle, valuePlanPrice) {
-    const planTitle = document.createElement("span");
-    planTitle.classList.add("summary-plan-title");
-    const summaryPlanPrice = document.createElement("span");
-    summaryPlanPrice.classList.add("plan-price");
-    //
-    const newValuePlanTitle = document.createTextNode(valuePlanTitle);
-    const newValuePlanPrice = document.createTextNode(valuePlanPrice);
-    //
-    planTitle.appendChild(newValuePlanTitle);
-    summaryPlanPrice.appendChild(newValuePlanPrice);
-
-    //
-    planTitle.appendChild(summaryPlanPrice);
-    summaryTitleGroup.append(planTitle);
+    totalPrice.textContent = `$${total}/${state.billingCycle === "yearly" ? "yr" : "mo"}`;
 }
 
-function updateSummaryPlan() {
-    createSummaryPlan(valuePlanTitle, valuePlanPrice);
+function handleChange(e) {
+    const target = e.target;
+
+    if (target.id === "billing-cycle") {
+        state.billingCycle = target.checked ? "yearly" : "monthly";
+        updateBillingUI();
+        if (state.step === 3) {
+            renderSummary();
+        }
+        return;
+    }
+
+    if (target.matches('input[name="plan"]')) {
+        syncPlanState();
+        if (state.step === 3) {
+            renderSummary();
+        }
+        return;
+    }
+
+    if (target.matches('input[name="addon"]')) {
+        syncAddonState();
+        if (state.step === 3) {
+            renderSummary();
+        }
+    }
+
+    if (target.matches('#name, #email, #phone')) {
+        syncPersonalState();
+    }
 }
-/* create Summary Options */
-function createSummaryOptions(valueOptionTitle, valueOptionPrice) {
-    const summaryOptionTitle = document.createElement("span");
-    summaryOptionTitle.classList.add("summary-option-title");
-    const summaryOptionPrice = document.createElement("span");
-    summaryOptionPrice.classList.add("option-price");
-    //
-    newValueOptionTitle = document.createTextNode(valueOptionTitle);
-    newValueOptionPrice = document.createTextNode(valueOptionPrice);
-    //
-    summaryOptionTitle.appendChild(newValueOptionTitle);
-    summaryOptionPrice.appendChild(newValueOptionPrice);
-    //
-    summaryOptionTitle.appendChild(summaryOptionPrice);
-    summaryOptionGroup.append(summaryOptionTitle);
+
+function handleClick(e) {
+    const target = e.target.closest("button, a");
+    if (!target) return;
+
+    if (target.matches("[data-next]")) {
+        if (!validateCurrentStep()) return;
+
+        syncPersonalState();
+        syncPlanState();
+        syncAddonState();
+
+        if (state.step < stepCards.length - 1) {
+            showStep(state.step + 1);
+        }
+        return;
+    }
+
+    if (target.matches("[data-back]")) {
+        if (state.step > 0) {
+            showStep(state.step - 1);
+        }
+        return;
+    }
+
+    if (target.matches(".link-change")) {
+        e.preventDefault();
+        showStep(1);
+    }
 }
 
-function updateSummaryOptions() {
-    createSummaryOptions(valueOptionTitle, valueOptionPrice);
+function handleSubmit(e) {
+    e.preventDefault();
+
+    if (state.step !== stepCards.length - 1) return;
+
+    syncPersonalState();
+    syncPlanState();
+    syncAddonState();
+
+    multiForm.hidden = true;
+    nav.hidden = true;
+    confirmation.hidden = false;
 }
 
-const currentUserInfo = [
-    { userInfo: { name: '', email: '', phone: '' } },
-    { selectPlan: { value: '', checked: '', data: '' } },
-    { pickAddons: { service: { value: '', checked: '', data: '' }, storage: { value: '', checked: '', data: '' }, custom: { value: '', checked: '', data: '' } }, },
-];
+multiForm.addEventListener("click", handleClick);
+multiForm.addEventListener("change", handleChange);
+multiForm.addEventListener("input", handleChange);
+multiForm.addEventListener("submit", handleSubmit);
 
-//updateSummaryPlan();
-//updateSummaryOptions();
-
-multiForm.addEventListener("submit", event => {
-    event.preventDefault();
-});
-
+updateBillingUI();
+showStep(0);
+syncPersonalState();
+syncPlanState();
+syncAddonState();
