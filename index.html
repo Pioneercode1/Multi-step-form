@@ -10,7 +10,6 @@
   <title>Frontend Mentor | Multi-step form</title>
   <link rel="stylesheet" href="./assets/css/style.css">
   <script src="./assets/js/app.js" defer></script>
-
 </head>
 
 <body>
@@ -76,7 +75,8 @@
           <div class="plan-item-container">
             <!-- plan option arcade -->
             <div class="plan-item">
-              <input type="radio" id="plan-arcade" name="plan" value="arcade"  plan-option="" data-monthly="$9/mo" data-yearly="$90/yr" required>
+              <input type="radio" id="plan-arcade" name="plan" value="arcade" plan-option="" data-monthly="$9/mo"
+                data-yearly="$90/yr" required>
               <label class="plan-card" for="plan-arcade" value="arcade" isActive="false" isDetailed="false"
                 aria-label="Select Arcade plan, $9 per month or $90 per year">
                 <img src="./assets/images/icon-arcade.svg" alt="Arcade plan icon" class="plan-icon">
@@ -89,19 +89,22 @@
             </div>
             <!-- plan option advanced -->
             <div class="plan-item">
-              <input type="radio" id="plan-advanced" name="plan" value="advanced" plan-option="" data-monthly="$12/mo" data-yearly="$120/yr" required>
+              <input type="radio" id="plan-advanced" name="plan" value="advanced" plan-option="" data-monthly="$12/mo"
+                data-yearly="$120/yr" required>
               <label class="plan-card" for="plan-advanced">
                 <img src="./assets/images/icon-advanced.svg" alt="Advanced plan icon" class="plan-icon">
                 <div class="plan-details">
                   <span class="plan-name" advanced="Advanced">Advanced</span>
-                  <span id="plan-price-advanced" class="plan-price" data-monthly="$12/mo" data-yearly="$120/yr">$12/mo</span>
+                  <span id="plan-price-advanced" class="plan-price" data-monthly="$12/mo"
+                    data-yearly="$120/yr">$12/mo</span>
                 </div>
                 <span class="data-free" data-free="2 months free" hidden>2 months free</span>
               </label>
             </div>
             <!-- plan option pro -->
             <div class="plan-item">
-              <input type="radio" id="plan-pro" name="plan" value="pro" plan-option="" data-monthly="$15/mo" data-yearly="$150/yr" required>
+              <input type="radio" id="plan-pro" name="plan" value="pro" plan-option="" data-monthly="$15/mo"
+                data-yearly="$150/yr" required>
               <label class="plan-card" for="plan-pro">
                 <img src="./assets/images/icon-pro.svg" alt="Pro plan icon" class="plan-icon">
                 <div class="plan-details">
@@ -136,7 +139,8 @@
           <div class="addons-item-container">
             <!-- add-on option online service -->
             <div class="addon-item">
-              <input type="checkbox" id="addon-online-service" name="addon" value="online-service" addon-option="" data-monthly="$1/mo" data-yearly="$10/yr">
+              <input type="checkbox" id="addon-online-service" name="addon" value="online-service" addon-option=""
+                data-monthly="$1/mo" data-yearly="$10/yr">
 
               <label class="addon-card" for="addon-online-service"
                 aria-label="Select Online Service add-on, $1 per month or $10 per year">
@@ -146,27 +150,31 @@
                   <span class="addon-description">Access to multiplayer games</span>
                 </div>
 
-                <span id="addon-price-service" class="addon-price" data-monthly="$1/mo" data-yearly="$10/yr">$1/mo</span>
+                <span id="addon-price-service" class="addon-price" data-monthly="$1/mo"
+                  data-yearly="$10/yr">$1/mo</span>
 
               </label>
             </div>
 
             <!-- add-on option larger storage -->
             <div class="addon-item">
-              <input type="checkbox" id="addon-larger-storage" name="addon" value="larger-storage" addon-option="" data-monthly="$2/mo" data-yearly="$20/yr">
+              <input type="checkbox" id="addon-larger-storage" name="addon" value="larger-storage" addon-option=""
+                data-monthly="$2/mo" data-yearly="$20/yr">
               <label class="addon-card" for="addon-larger-storage"
                 aria-label="Select Larger Storage add-on, $2 per month or $20 per year">
                 <div class="addon-details">
                   <span class="addon-name">Larger storage</span>
                   <span class="addon-description">Extra 1TB of cloud save</span>
                 </div>
-                <span id="addon-price-storage" class="addon-price" data-monthly="$2/mo" data-yearly="$20/yr">$2/mo</span>
+                <span id="addon-price-storage" class="addon-price" data-monthly="$2/mo"
+                  data-yearly="$20/yr">$2/mo</span>
               </label>
             </div>
 
             <!-- add-on option customizable profile -->
             <div class="addon-item">
-              <input type="checkbox" id="addon-customizable-profile" name="addon" value="customizable-profile" addon-option="" data-monthly="$2/mo" data-yearly="$20/yr">
+              <input type="checkbox" id="addon-customizable-profile" name="addon" value="customizable-profile"
+                addon-option="" data-monthly="$2/mo" data-yearly="$20/yr">
               <label class="addon-card" for="addon-customizable-profile"
                 aria-label="Select Customizable Profile add-on, $2 per month or $20 per year">
                 <div class="addon-details">
@@ -223,11 +231,14 @@
     </form>
     <!-- ************************** -->
     <!-- Step 5: confirming -->
-    <section class="step-confirmation" hidden>
-      Thank you!
-      Thanks for confirming your subscription! We hope you have fun
-      using our platform. If you ever need support, please feel free
-      to email us at support@loremgaming.com.
+    <section class="step-confirmation">
+      <img src="./assets/images/icon-thank-you.svg" alt="icon thank you">
+      <div>
+        <h3>Thank you!</h3>
+        <p>Thanks for confirming your subscription! We hope you have fun
+          using our platform. If you ever need support, please feel free
+          to email us at support@loremgaming.com.</p>
+      </div>
     </section>
   </main>
 

@@ -1,292 +1,203 @@
+/* Elements Selection */
 const multiForm = document.getElementById("multi-form");
-const stepCards = Array.from(document.querySelectorAll(".step-card"));
-const stepIndicators = Array.from(document.querySelectorAll(".step-item-index"));
-const stepItems = Array.from(document.querySelectorAll(".step-item"));
-/* buttons */
+const stepNumber = document.querySelectorAll(".step-item-index");
+const stepCard = document.querySelectorAll(".step-card");
+
+/* Plan Elements */
+const planPriceArcade = document.getElementById("plan-price-arcade");
+const planPriceAdvanced = document.getElementById("plan-price-advanced");
+const planPricePro = document.getElementById("plan-price-pro");
+const onYearly = document.getElementById("billing-cycle");
+const freeTwoMonths = document.querySelectorAll(".data-free");
+const dataPer = document.getElementById("data-per");
+const allRadio = document.querySelectorAll('.plan-item-container input[type="radio"]');
+
+/* Add-ons Elements */
+const addonService = document.getElementById("addon-price-service");
+const addonStorage = document.getElementById("addon-price-storage");
+const addonCustom = document.getElementById("addon-price-custom");
+const allCheckbox = document.querySelectorAll('.addons-item-container input[type="checkbox"]');
+
+/* Summary Elements */
+const summaryTitleGroup = document.querySelector(".plan-title-group");
+const summaryOptionGroup = document.querySelector(".summary-option");
+const totalPrice = document.querySelector(".total-price");
+
+/* Action Buttons */
 const btnBack = document.querySelector(".btn-back");
 const btnNext = document.querySelector(".btn-next");
 const btnConfirm = document.querySelector(".btn-confirm");
-const billingToggle = document.getElementById("billing-cycle");
-/* plan */
-const monthlyLabel = document.querySelector(".monthly");
-const yearlyLabel = document.querySelector(".yearly");
-const freeLabels = Array.from(document.querySelectorAll(".data-free"));
-const dataPer = document.getElementById("data-per");
-const totalPrice = document.getElementById("total-price");
-const summaryTitleGroup = document.querySelector(".plan-title-group");
-const summaryOptionGroup = document.querySelector(".summary-option");
-const confirmation = document.querySelector(".step-confirmation");
-const nav = document.querySelector(".nav-step-container");
+const stepConfirmation = document.querySelector(".step-confirmation");
 
-const planOptions = Array.from(document.querySelectorAll(".plan-item")).map((item) => ({
-    item,
-    input: item.querySelector('input[type="radio"]'),
-    name: item.querySelector(".plan-name"),
-    price: item.querySelector(".plan-price"),
-    free: item.querySelector(".data-free"),
-}));
+let currentStep = 0;
 
-const addonOptions = Array.from(document.querySelectorAll(".addon-item")).map((item) => ({
-    item,
-    input: item.querySelector('input[type="checkbox"]'),
-    name: item.querySelector(".addon-name"),
-    price: item.querySelector(".addon-price"),
-}));
-
-const state = {
-    step: 0,
-    billingCycle: billingToggle.checked ? "yearly" : "monthly",
-    personal: {
-        name: "",
-        email: "",
-        phone: "",
-    },
-    plan: "",
-    addons: [],
+/*Modern Practice: Clean State Architecture*/
+const formState = {
+    personalInfo: { name: '', email: '', phone: '' },
+    plan: { name: '', price: '', type: 'monthly' },
+    addons: []
 };
 
-function priceNumber(text) {
-    const match = String(text).match(/\d+/);
-    return match ? Number(match[0]) : 0;
-}
-
-function getSelectedPlanOption() {
-    const selectedInput = multiForm.querySelector('input[name="plan"]:checked');
-    if (!selectedInput) return null;
-    return planOptions.find((option) => option.input === selectedInput) ?? null;
-}
-
-function getSelectedAddons() {
-    return addonOptions.filter((option) => option.input.checked);
-}
-
-function updateStepIndicators() {
-    stepIndicators.forEach((indicator, index) => {
-        indicator.classList.toggle("step-active", index === state.step);
+function updateProgress() {
+    stepNumber.forEach((num, index) => {
+        num.classList.toggle("step-active", index === currentStep);
     });
+    btnBack.hidden = currentStep === 0;
+    btnNext.hidden = currentStep === stepCard.length - 1;
+    btnConfirm.hidden = currentStep !== stepCard.length - 1;
+}
 
-    stepItems.forEach((item, index) => {
-        if (index === state.step) {
-            item.setAttribute("aria-current", "step");
-        } else {
-            item.removeAttribute("aria-current");
+function updateUI() {
+    stepCard.forEach((step, index) => {
+        step.classList.toggle("active", index === currentStep);
+    });
+}
+
+function saveCurrentStepData() {
+    if (currentStep === 0) {
+
+        formState.personalInfo.name = document.getElementById("name").value;
+        formState.personalInfo.email = document.getElementById("email").value;
+        formState.personalInfo.phone = document.getElementById("phone").value;
+    }
+    else if (currentStep === 1) {
+
+        const selectedRadio = document.querySelector('input[name="plan"]:checked');
+        if (selectedRadio) {
+            const isYearly = onYearly.checked;
+            formState.plan.name = selectedRadio.value;
+            formState.plan.price = isYearly ? selectedRadio.getAttribute("data-yearly") : selectedRadio.getAttribute("data-monthly");
+            formState.plan.type = isYearly ? 'yearly' : 'monthly';
         }
-    });
-}
-
-function updateButtons() {
-    btnBack.hidden = state.step === 0;
-    btnNext.hidden = state.step === stepCards.length - 1;
-    btnConfirm.hidden = state.step !== stepCards.length - 1;
-}
-
-function showStep(stepIndex) {
-    state.step = stepIndex;
-    stepCards.forEach((card, index) => {
-        card.classList.toggle("active", index === stepIndex);
-    });
-    updateStepIndicators();
-    updateButtons();
-
-    if (stepIndex === 3) {
-        renderSummary();
     }
-}
+    else if (currentStep === 2) {
 
-function validateCurrentStep() {
-    const currentCard = stepCards[state.step];
-    const requiredControls = Array.from(currentCard.querySelectorAll("input, select, textarea"));
+        formState.addons = [];
+        const isYearly = onYearly.checked;
 
-    if (state.step === 1) {
-        const selectedPlan = currentCard.querySelector('input[name="plan"]:checked');
-        if (!selectedPlan) {
-            const firstRadio = currentCard.querySelector('input[name="plan"]');
-            firstRadio?.reportValidity();
-            return false;
-        }
-        return true;
+        allCheckbox.forEach(box => {
+            if (box.checked) {
+                const addonItem = box.closest('.addon-item');
+                const name = addonItem.querySelector('.addon-name').innerText;
+                const price = isYearly ? box.getAttribute("data-yearly") : box.getAttribute("data-monthly");
+
+                formState.addons.push({ name, price });
+            }
+        });
     }
-
-    const invalidControl = requiredControls.find((control) => !control.checkValidity());
-    if (invalidControl) {
-        invalidControl.reportValidity();
-        return false;
-    }
-
-    return true;
-}
-
-function syncPersonalState() {
-    state.personal.name = document.getElementById("name").value.trim();
-    state.personal.email = document.getElementById("email").value.trim();
-    state.personal.phone = document.getElementById("phone").value.trim();
-}
-
-function syncPlanState() {
-    const selectedPlan = getSelectedPlanOption();
-    if (!selectedPlan) {
-        state.plan = "";
-        return;
-    }
-
-    state.plan = selectedPlan.input.value;
-}
-
-function syncAddonState() {
-    state.addons = getSelectedAddons().map((option) => option.input.value);
-}
-
-function updateBillingUI() {
-    const isYearly = state.billingCycle === "yearly";
-
-    monthlyLabel.classList.toggle("active-time", !isYearly);
-    yearlyLabel.classList.toggle("active-time", isYearly);
-
-    freeLabels.forEach((label) => {
-        label.hidden = !isYearly;
-    });
-
-    planOptions.forEach((option) => {
-        option.price.textContent = option.price.dataset[state.billingCycle];
-    });
-
-    addonOptions.forEach((option) => {
-        option.price.textContent = option.price.dataset[state.billingCycle];
-    });
-
-    dataPer.textContent = isYearly ? "(per year)" : "(per month)";
 }
 
 function renderSummary() {
-    const selectedPlan = getSelectedPlanOption();
-    const selectedAddons = getSelectedAddons();
-    const cycleLabel = state.billingCycle === "yearly" ? "Yearly" : "Monthly";
+    // معالجة وعرض الخطة المحددة (تنظيف الإدخال القديم لمنع التكرار)
+    const existingTitle = summaryTitleGroup.querySelector('.summary-plan-title');
+    if (existingTitle) existingTitle.remove();
 
-    const planName = selectedPlan ? selectedPlan.name.textContent.trim() : "No plan selected";
-    const planPriceText = selectedPlan ? selectedPlan.price.dataset[state.billingCycle] : "$0/mo";
+    if (formState.plan.name) {
+        const planTitleSpan = document.createElement("span");
+        planTitleSpan.classList.add("summary-plan-title");
+        const billingText = formState.plan.type === 'yearly' ? 'Yearly' : 'Monthly';
 
-    summaryTitleGroup.innerHTML = `
-    <div class="summary-plan-title">
-      <span>${planName} (${cycleLabel})</span>
-      <span class="plan-price">${planPriceText}</span>
-    </div>
-    <a href="#" class="link-change">Change</a>
-  `;
+        // تحويل الحرف الأول لكبير لتنسيق مظهر النص جمالياً
+        const formattedPlanName = formState.plan.name.charAt(0).toUpperCase() + formState.plan.name.slice(1);
 
-    summaryOptionGroup.innerHTML = "";
-
-    let total = selectedPlan ? priceNumber(selectedPlan.price.dataset[state.billingCycle]) : 0;
-
-    if (selectedAddons.length === 0) {
-        const emptyRow = document.createElement("span");
-        emptyRow.className = "summary-option-title";
-        emptyRow.textContent = "No add-ons selected";
-        summaryOptionGroup.append(emptyRow);
-    } else {
-        selectedAddons.forEach((option) => {
-            const row = document.createElement("span");
-            row.className = "summary-option-title";
-
-            const addonName = document.createElement("span");
-            addonName.textContent = option.name.textContent.trim();
-
-            const addonPrice = document.createElement("span");
-            addonPrice.className = "option-price";
-            addonPrice.textContent = `+${option.price.dataset[state.billingCycle]}`;
-
-            row.append(addonName, addonPrice);
-            summaryOptionGroup.append(row);
-
-            total += priceNumber(option.price.dataset[state.billingCycle]);
-        });
+        planTitleSpan.innerHTML = `${formattedPlanName} (${billingText}) <span class="plan-price">${formState.plan.price}</span>`;
+        summaryTitleGroup.insertBefore(planTitleSpan, summaryTitleGroup.querySelector('.link-change'));
     }
 
-    totalPrice.textContent = `$${total}/${state.billingCycle === "yearly" ? "yr" : "mo"}`;
+    //  تنظيف وحقن الإضافات المحددة (Checkboxes)
+    summaryOptionGroup.innerHTML = '';
+    formState.addons.forEach(addon => {
+        const addonOptionTitle = document.createElement("span");
+        addonOptionTitle.classList.add("summary-option-title");
+        addonOptionTitle.innerHTML = `${addon.name} <span class="option-price">${addon.price}</span>`;
+        summaryOptionGroup.appendChild(addonOptionTitle);
+    });
+
+    //  حساب المجموع الكلي بصيغة رياضية ديناميكية
+    const planPriceNum = parseInt(formState.plan.price.replace(/[^0-9]/g, '')) || 0;
+    const addonsPriceSum = formState.addons.reduce((sum, addon) => {
+        return sum + (parseInt(addon.price.replace(/[^0-9]/g, '')) || 0);
+    }, 0);
+
+    const grandTotal = planPriceNum + addonsPriceSum;
+    const perText = formState.plan.type === 'yearly' ? 'yr' : 'mo';
+
+    dataPer.innerText = formState.plan.type === 'yearly' ? '(per year)' : '(per month)';
+    totalPrice.innerText = `+$${grandTotal}/${perText}`;
 }
 
-function handleChange(e) {
+/*Event Listeners*/
+
+multiForm.addEventListener("click", e => {
     const target = e.target;
 
-    if (target.id === "billing-cycle") {
-        state.billingCycle = target.checked ? "yearly" : "monthly";
-        updateBillingUI();
-        if (state.step === 3) {
-            renderSummary();
-        }
-        return;
-    }
-
-    if (target.matches('input[name="plan"]')) {
-        syncPlanState();
-        if (state.step === 3) {
-            renderSummary();
-        }
-        return;
-    }
-
-    if (target.matches('input[name="addon"]')) {
-        syncAddonState();
-        if (state.step === 3) {
-            renderSummary();
-        }
-    }
-
-    if (target.matches('#name, #email, #phone')) {
-        syncPersonalState();
-    }
-}
-
-function handleClick(e) {
-    const target = e.target.closest("button, a");
-    if (!target) return;
-
     if (target.matches("[data-next]")) {
-        if (!validateCurrentStep()) return;
+        const inputs = stepCard[currentStep].querySelectorAll("input");
+        const valid = [...inputs].every(input => input.checkValidity());
 
-        syncPersonalState();
-        syncPlanState();
-        syncAddonState();
-
-        if (state.step < stepCards.length - 1) {
-            showStep(state.step + 1);
+        if (!valid) {
+            inputs.forEach(input => input.reportValidity());
+            return;
         }
-        return;
-    }
 
-    if (target.matches("[data-back]")) {
-        if (state.step > 0) {
-            showStep(state.step - 1);
+        saveCurrentStepData();
+
+        if (currentStep < stepCard.length - 1) {
+            currentStep++;
+            if (currentStep === 3) {
+                renderSummary();
+            }
+            updateProgress();
+            updateUI();
         }
-        return;
     }
+    else if (target.matches("[data-back]")) {
+        if (currentStep > 0) {
+            currentStep--;
+            updateProgress();
+            updateUI();
+        }
+    }
+});
 
-    if (target.matches(".link-change")) {
+const linkChange = document.querySelector(".link-change");
+if (linkChange) {
+    linkChange.addEventListener("click", e => {
         e.preventDefault();
-        showStep(1);
-    }
+        currentStep = 1;
+        updateProgress();
+        updateUI();
+    });
 }
 
-function handleSubmit(e) {
-    e.preventDefault();
+onYearly.addEventListener("change", () => {
+    const isYearly = onYearly.checked;
 
-    if (state.step !== stepCards.length - 1) return;
+    freeTwoMonths.forEach(span => span.hidden = !isYearly);
 
-    syncPersonalState();
-    syncPlanState();
-    syncAddonState();
+    planPriceArcade.innerText = planPriceArcade.getAttribute(isYearly ? "data-yearly" : "data-monthly");
+    planPriceAdvanced.innerText = planPriceAdvanced.getAttribute(isYearly ? "data-yearly" : "data-monthly");
+    planPricePro.innerText = planPricePro.getAttribute(isYearly ? "data-yearly" : "data-monthly");
 
-    multiForm.hidden = true;
-    nav.hidden = true;
-    confirmation.hidden = false;
-}
+    addonService.innerText = addonService.getAttribute(isYearly ? "data-yearly" : "data-monthly");
+    addonStorage.innerText = addonStorage.getAttribute(isYearly ? "data-yearly" : "data-monthly");
+    addonCustom.innerText = addonCustom.getAttribute(isYearly ? "data-yearly" : "data-monthly");
 
-multiForm.addEventListener("click", handleClick);
-multiForm.addEventListener("change", handleChange);
-multiForm.addEventListener("input", handleChange);
-multiForm.addEventListener("submit", handleSubmit);
+    dataPer.innerText = isYearly ? "(per year)" : "(per month)";
 
-updateBillingUI();
-showStep(0);
-syncPersonalState();
-syncPlanState();
-syncAddonState();
+    allRadio.forEach(radio => radio.checked = false);
+    formState.plan = { name: '', price: '', type: isYearly ? 'yearly' : 'monthly' };
+});
+
+multiForm.addEventListener("submit", event => {
+    event.preventDefault();
+    multiForm.style.display = "none";
+    stepConfirmation.style.display = "block";
+    stepConfirmation.style.opacity = "1";
+    stepConfirmation.style.pointerEvents = "auto";
+
+    console.log("البيانات النهائية الجاهزة للإرسال للسيرفر:", formState);
+});
+
+updateProgress();
+updateUI();

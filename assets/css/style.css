@@ -318,7 +318,8 @@ body {
 .plan-icon {
   width: 40px;
   height: 40px;
-  margin-bottom: var(--size-l); /* 1.75 rem */
+  margin-bottom: var(--size-l);
+  /* 1.75 rem */
 }
 
 .plan-name {
@@ -334,7 +335,8 @@ body {
 }
 
 .plan-card .data-free {
-  font-size: var(--font-size-xxs); /* .75 rem*/
+  font-size: var(--font-size-xxs);
+  /* .75 rem*/
   color: var(--blue-950);
   margin-block-start: 4px;
 }
@@ -628,8 +630,20 @@ body {
 /* Step 5: Confirmation */
 .step-confirmation {
   display: none;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 380px;
+  height: 400px;
   opacity: 0;
   pointer-events: none;
+  z-index: 999;
+}
+
+.step-confirmation.goActive {
+  display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 button:focus-visible,
