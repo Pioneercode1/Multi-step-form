@@ -15,7 +15,6 @@
   --grey-500: hsl(231, 11%, 63%);
   --violet: hsl(243, 31%, 44%);
   --violet-2: hsl(243, 100%, 62%);
-  --vv: hsl(213, 96%, 18%);
   --light-violet: hsl(230, 75%, 98%);
   --purple-200: hsl(229, 24%, 87%);
   --blue-100: hsl(218, 100%, 97%);
@@ -630,11 +629,14 @@ body {
 /* Step 5: Confirmation */
 .step-confirmation {
   display: none;
-  justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
-  width: 380px;
-  height: 400px;
+  justify-content: center;
+  align-items: center;
+  gap: var(--font-size-xl);
+  /* 2 rem*/
+  width: 450px;
+  height: 420px;
+  padding-inline-end: var(--font-size-m);
   opacity: 0;
   pointer-events: none;
   z-index: 999;
@@ -644,6 +646,25 @@ body {
   display: flex;
   opacity: 1;
   pointer-events: auto;
+}
+
+.step-confirmation .des-confirm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--font-size-m); /* 1.5rem*/
+}
+
+.step-confirmation .heading-confirmation {
+  color: var(--blue-950);
+  font-size: var(--font-size-xl);
+}
+
+.step-confirmation .des-confirmation {
+  color: var(--gray-1);
+  font-size: var(--font-size-s); /* 1.25 rem*/
+  line-height: 1.6;
 }
 
 button:focus-visible,

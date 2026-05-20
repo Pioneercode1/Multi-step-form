@@ -88,23 +88,21 @@ function saveCurrentStepData() {
 }
 
 function renderSummary() {
-    // معالجة وعرض الخطة المحددة (تنظيف الإدخال القديم لمنع التكرار)
     const existingTitle = summaryTitleGroup.querySelector('.summary-plan-title');
-    if (existingTitle) existingTitle.remove();
+    if (existingTitle) {existingTitle.remove();}
 
     if (formState.plan.name) {
         const planTitleSpan = document.createElement("span");
         planTitleSpan.classList.add("summary-plan-title");
         const billingText = formState.plan.type === 'yearly' ? 'Yearly' : 'Monthly';
 
-        // تحويل الحرف الأول لكبير لتنسيق مظهر النص جمالياً
         const formattedPlanName = formState.plan.name.charAt(0).toUpperCase() + formState.plan.name.slice(1);
 
         planTitleSpan.innerHTML = `${formattedPlanName} (${billingText}) <span class="plan-price">${formState.plan.price}</span>`;
         summaryTitleGroup.insertBefore(planTitleSpan, summaryTitleGroup.querySelector('.link-change'));
     }
 
-    //  تنظيف وحقن الإضافات المحددة (Checkboxes)
+    //  clean and add selected options (Checkboxes)
     summaryOptionGroup.innerHTML = '';
     formState.addons.forEach(addon => {
         const addonOptionTitle = document.createElement("span");
@@ -113,7 +111,6 @@ function renderSummary() {
         summaryOptionGroup.appendChild(addonOptionTitle);
     });
 
-    //  حساب المجموع الكلي بصيغة رياضية ديناميكية
     const planPriceNum = parseInt(formState.plan.price.replace(/[^0-9]/g, '')) || 0;
     const addonsPriceSum = formState.addons.reduce((sum, addon) => {
         return sum + (parseInt(addon.price.replace(/[^0-9]/g, '')) || 0);
@@ -192,11 +189,9 @@ onYearly.addEventListener("change", () => {
 multiForm.addEventListener("submit", event => {
     event.preventDefault();
     multiForm.style.display = "none";
-    stepConfirmation.style.display = "block";
-    stepConfirmation.style.opacity = "1";
-    stepConfirmation.style.pointerEvents = "auto";
+    stepConfirmation.classList.add("goActive");
 
-    console.log("البيانات النهائية الجاهزة للإرسال للسيرفر:", formState);
+    //console.log("data it is ready for send to server:", formState);
 });
 
 updateProgress();
