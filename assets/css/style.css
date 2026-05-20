@@ -695,10 +695,11 @@ input:focus-visible {
 
   /* multi form container */
   #multi-form {
-    width: 375px;
+    width: 90%;
     height: auto;
     display: flex;
     padding: 0px;
+    border-radius: var(--font-size-xxs); /* 0.75 rem*/
   }
 
   /* Step card */
@@ -711,11 +712,13 @@ input:focus-visible {
   /* Step 1 - Plan Selection */
   .personal-info-header {
     margin-block-end: var(--font-size-xl);
-    width: 90%;
+    font-size: var(--font-size-xl);
+      /* 1.75 rem*/
+    width: 85%;
   }
 
   .personal-info-header .span-personal-info {
-    font-size: var(--font-size-m); /* 1.5 rem*/
+    font-size: var(--font-size-m); /* 1.25 rem*/
   }
 
   .input-personal-group {
@@ -738,4 +741,26 @@ input:focus-visible {
     width: 100%;
     height: auto;
   }
+
+  .plan-item-container .plan-item {
+    width: 100%;
+    height: max-content;
+  }
+  
+  .plan-item-container .plan-item:last-child {
+      margin-block-end: var(--font-size-xl);
+    }
+
+    .plan-card {
+      flex-direction: row;
+      align-items: space-between;
+      gap: var(--font-size-s);
+      width: 100%;
+      height: 100%;
+    }
+
+    .billing-toggle {
+      margin-block-end: var(--font-size-xl);
+    }
+
 }
