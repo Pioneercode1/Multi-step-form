@@ -1,14 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
 
 :root {
-  /*Colors Primary*/
   --blue-950: hsl(213, 96%, 18%);
   --black: hsla(0, 0%, 0%, 1);
   --blue-300: hsl(228, 100%, 84%);
-
   --blue-200: hsl(206, 94%, 87%);
   --red-500: hsl(354, 84%, 57%);
-  /*Colors Neutral*/
   --gray-1: hsl(230, 3%, 62%);
   --light-gray: hsl(231, 100%, 99%);
   --gray: hsl(252, 7%, 86%);
@@ -20,13 +17,11 @@
   --blue-100: hsl(218, 100%, 97%);
   --dark-green: hsl(120, 17%, 10%);
   --white: hsl(0, 0%, 100%);
-
-  /* Fonts Weights */
+  /*font weights*/
   --weight-regular: 400;
   --weight-normal: 500;
   --weight-bold: 700;
-
-  /*Spacing*/
+  /*sizes*/
   --size-ms: 0.5rem;
   --size-xxs: 0.75rem;
   --size-xs: 1rem;
@@ -35,34 +30,16 @@
   --size-l: 1.75rem;
   --size-xl: 2rem;
   --size-xxl: 2.5rem;
-  --size-3xl: 2.75rem;
   --size-4xl: 3rem;
-
-  /* typography */
   --font-size-xxs: 0.75rem;
   --font-size-xs: 0.875rem;
   --font-size-s: 1rem;
   --font-size-m: 1.25rem;
   --font-size-l: 1.5rem;
   --font-size-xl: 2rem;
-  --font-size-2xl: 2.25rem;
-  --font-size-3xl: 2.5rem;
-  --font-size-4xl: 2.75rem;
-
-  /*Shadows*/
-  --shadow-s: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-m: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-l: 0 10px 15px rgba(0, 0, 0, 0.1);
-
-  /*Transitions*/
   --transition-s: 0.2s ease-in-out;
   --transition-m: 0.3s ease-in-out;
   --transition-l: 0.5s ease-in-out;
-
-  /*Site Size*/
-  --mobile-width: 375px;
-  --tablet-width: 768px;
-  --desktop-width: 1440px;
 }
 
 *,
@@ -258,7 +235,6 @@ body {
   border: 1px solid var(--purple-200);
   border-radius: var(--size-ms);
   /* 8px */
-  corner-shape: quadratic;
 }
 
 .input-personal-group input::placeholder {
@@ -639,7 +615,6 @@ body {
   padding-inline-end: var(--font-size-m);
   opacity: 0;
   pointer-events: none;
-  z-index: 999;
 }
 
 .step-confirmation.goActive {
@@ -653,7 +628,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: var(--font-size-m); /* 1.5rem*/
+  gap: var(--font-size-m);
+  /* 1.5rem*/
 }
 
 .step-confirmation .heading-confirmation {
@@ -663,7 +639,8 @@ body {
 
 .step-confirmation .des-confirmation {
   color: var(--gray-1);
-  font-size: var(--font-size-s); /* 1.25 rem*/
+  font-size: var(--font-size-s);
+  /* 1.25 rem*/
   line-height: 1.6;
 }
 
@@ -675,5 +652,90 @@ input:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    padding: 0px;
+  }
+
+  /* navigation container */
+  .nav-step-container {
+    width: 100%;
+    height: 25%;
+    margin: 0px;
+  }
+
+  .nav-step-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .steps-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    width: 50%;
+    height: 50%;
+    margin: 0px;
+    position: absolute;
+    top: 30%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* multi form container */
+  #multi-form {
+    width: 375px;
+    height: auto;
+    display: flex;
+    padding: 0px;
+  }
+
+  /* Step card */
+  .step-card {
+    width: 100%;
+    height: 100%;
+    padding-block-start: var(--font-size-xl);
+  }
+
+  /* Step 1 - Plan Selection */
+  .personal-info-header {
+    margin-block-end: var(--font-size-xl);
+    width: 90%;
+  }
+
+  .personal-info-header .span-personal-info {
+    font-size: var(--font-size-m); /* 1.5 rem*/
+  }
+
+  .input-personal-group {
+    margin-block-end: var(--size-xl);
+  }
+
+  .input-personal-group input {
+    margin-block-end: var(--size-s);
+  }
+
+  /* Step 2: Select plan */
+  .plan-item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--size-s);
+    padding-block-start: var(--size-xxl);
+    /* 2.5rem */
+    width: 100%;
+    height: auto;
   }
 }

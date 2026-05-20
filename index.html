@@ -9,238 +9,213 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <title>Frontend Mentor | Multi-step form</title>
   <link rel="stylesheet" href="./assets/css/style.css">
-  <script src="./assets/js/app.js" defer></script>
+  <!--<script src="./assets/js/app.js" defer></script>-->
 </head>
 
 <body>
+<main class="app-container">
+  <nav class="nav-step-container" aria-label="Progress">
+    <picture>
+      <source media="(min-width: 769px)" srcset="./assets/images/bg-sidebar-desktop.svg">
+      <source media="(max-width: 768px)" srcset="./assets/images/bg-sidebar-mobile.svg">
+      <img src="./assets/images/bg-sidebar-desktop.svg" alt="Sidebar background image" height="568" width="274">
+    </picture>
 
-  <main class="app-container">
-    <!-- Sidebar start -->
-    <nav class="nav-step-container" aria-label="Progress">
-      <picture>
-        <source media="(min-width: 400px)" srcset="./assets/images/bg-sidebar-desktop.svg" height="568px" width="274px">
-        <source media="(max-width: 399px)" srcset="./assets/images/bg-sidebar-mobile.svg">
-        <img src="./assets/images/bg-sidebar-desktop.svg" alt="Sidebar background image" height="568px" width="274px">
-      </picture>
-      <ol class="steps-list" role="list">
-        <li class="step-item" aria-current="step">
-          <span class="step-item-index" aria-current="step">1</span>
-          <span class="step-item-number">step 1 <br><span class="step-item-title">Your info</span></span>
+    <ol class="steps-list" role="list">
+      <li class="step-item" aria-current="step">
+        <span class="step-item-index step-active">1</span>
+        <span class="step-item-number">step 1 <br><span class="step-item-title">Your info</span></span>
+      </li>
+      <li class="step-item">
+        <span class="step-item-index">2</span>
+        <span class="step-item-number">step 2 <br><span class="step-item-title">Select plan</span></span>
+      </li>
+      <li class="step-item">
+        <span class="step-item-index">3</span>
+        <span class="step-item-number">step 3 <br><span class="step-item-title">Add-ons</span></span>
+      </li>
+      <li class="step-item">
+        <span class="step-item-index">4</span>
+        <span class="step-item-number">step 4 <br><span class="step-item-title">Summary</span></span>
+      </li>
+    </ol>
+  </nav>
 
-        </li>
-        <li class="step-item" aria-current="step">
-          <span class="step-item-index">2</span>
-          <span class="step-item-number">step 2 <br><span class="step-item-title">Select plan</span></span>
+  <form id="multi-form" novalidate>
+    <section class="step-card" aria-label="Step 1: Your info">
+      <fieldset class="personal-info-group">
+        <legend class="personal-info-header">
+          Personal info <br>
+          <span class="span-personal-info">Please provide your name, email address, and phone number.</span>
+        </legend>
 
-        </li>
-        <li class="step-item" aria-current="step">
-          <span class="step-item-index">3</span>
-          <span class="step-item-number">step 3 <br><span class="step-item-title">Add-ons</span></span>
-        </li>
-        <li class="step-item" aria-current="step">
-          <span class="step-item-index">4</span>
-          <span class="step-item-number">step 4 <br><span class="step-item-title">Summary</span></span>
-        </li>
-      </ol>
-    </nav>
-    <!-- Sidebar end -->
-    <!-- ************************** -->
-    <!-- Start form -->
-    <form id="multi-form">
-      <!-- Step 1: Your info -->
-      <section class="step-card" aria-label="Step 1: Your info">
-        <fieldset class="personal-info-group">
-          <legend class="personal-info-header">Personal info <br><span class="span-personal-info">Please provide your
-              name, email address, and phone number.</span></legend>
-          <div class="input-personal-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="e.g. Stephen King" required>
+        <div class="input-personal-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="e.g. Stephen King" required>
 
-            <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="e.g. stephenking@lorem.com" required>
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="e.g. stephenking@lorem.com"
+            required>
 
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" placeholder="e.g. +1 234 567 890" required>
-          </div>
-        </fieldset>
-      </section>
-      <!-- Step 1 end -->
-      <!-- ************************** -->
-      <!-- Step 2: Select plan -->
-      <section class="step-card active" aria-label="Step 2: Select plan">
-        <fieldset class="personal-info-group">
-          <legend class="personal-info-header">Select your plan <br><span class="span-personal-info">You have the option
-              of monthly or yearly billing.</span></legend>
-
-          <div class="plan-item-container">
-            <!-- plan option arcade -->
-            <div class="plan-item">
-              <input type="radio" id="plan-arcade" name="plan" value="arcade" plan-option="" data-monthly="$9/mo"
-                data-yearly="$90/yr" required>
-              <label class="plan-card" for="plan-arcade" value="arcade" isActive="false" isDetailed="false"
-                aria-label="Select Arcade plan, $9 per month or $90 per year">
-                <img src="./assets/images/icon-arcade.svg" alt="Arcade plan icon" class="plan-icon">
-                <div class="plan-details">
-                  <span class="plan-name" arcade="Arcade">Arcade</span>
-                  <span id="plan-price-arcade" class="plan-price" data-monthly="$9/mo" data-yearly="$90/yr">$9/mo</span>
-                </div>
-                <span class="data-free" data-free="2 months free" hidden>2 months free</span>
-              </label>
-            </div>
-            <!-- plan option advanced -->
-            <div class="plan-item">
-              <input type="radio" id="plan-advanced" name="plan" value="advanced" plan-option="" data-monthly="$12/mo"
-                data-yearly="$120/yr" required>
-              <label class="plan-card" for="plan-advanced">
-                <img src="./assets/images/icon-advanced.svg" alt="Advanced plan icon" class="plan-icon">
-                <div class="plan-details">
-                  <span class="plan-name" advanced="Advanced">Advanced</span>
-                  <span id="plan-price-advanced" class="plan-price" data-monthly="$12/mo"
-                    data-yearly="$120/yr">$12/mo</span>
-                </div>
-                <span class="data-free" data-free="2 months free" hidden>2 months free</span>
-              </label>
-            </div>
-            <!-- plan option pro -->
-            <div class="plan-item">
-              <input type="radio" id="plan-pro" name="plan" value="pro" plan-option="" data-monthly="$15/mo"
-                data-yearly="$150/yr" required>
-              <label class="plan-card" for="plan-pro">
-                <img src="./assets/images/icon-pro.svg" alt="Pro plan icon" class="plan-icon">
-                <div class="plan-details">
-                  <span class="plan-name" pro="Pro">Pro</span>
-                  <span id="plan-price-pro" class="plan-price" data-monthly="$15/mo" data-yearly="$150/yr">$15/mo</span>
-                </div>
-                <span class="data-free" data-free="2 months free" hidden>2 months free</span>
-              </label>
-            </div>
-          </div>
-        </fieldset>
-        <!-- billing toggle -->
-        <div class="billing-toggle">
-          <span class="toggle-label monthly active-time">Monthly</span>
-
-          <label class="switch" for="billing-cycle" aria-label="Toggle billing cycle">
-            <input type="checkbox" id="billing-cycle">
-            <span class="slider"></span>
-          </label>
-
-          <span class="toggle-label yearly">Yearly</span>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="e.g. +1 234 567 890" required>
         </div>
-      </section>
-      <!-- Step 2 end -->
-      <!-- ************************** -->
-      <!-- Step 3: Add-ons -->
-      <section class="step-card" aria-label="Step 3: Add-ons">
-        <fieldset class="personal-info-group">
-          <legend class="personal-info-header">Pick add-ons <br><span class="span-personal-info">Add-ons help enhance
-              your gaming experience.</span></legend>
+      </fieldset>
+    </section>
 
-          <div class="addons-item-container">
-            <!-- add-on option online service -->
-            <div class="addon-item">
-              <input type="checkbox" id="addon-online-service" name="addon" value="online-service" addon-option=""
-                data-monthly="$1/mo" data-yearly="$10/yr">
+    <section class="step-card active" aria-label="Step 2: Select plan">
+      <fieldset class="personal-info-group">
+        <legend class="personal-info-header">
+          Select your plan <br>
+          <span class="span-personal-info">You have the option of monthly or yearly billing.</span>
+        </legend>
 
-              <label class="addon-card" for="addon-online-service"
-                aria-label="Select Online Service add-on, $1 per month or $10 per year">
-
-                <div class="addon-details">
-                  <span class="addon-name">Online service</span>
-                  <span class="addon-description">Access to multiplayer games</span>
-                </div>
-
-                <span id="addon-price-service" class="addon-price" data-monthly="$1/mo"
-                  data-yearly="$10/yr">$1/mo</span>
-
-              </label>
-            </div>
-
-            <!-- add-on option larger storage -->
-            <div class="addon-item">
-              <input type="checkbox" id="addon-larger-storage" name="addon" value="larger-storage" addon-option=""
-                data-monthly="$2/mo" data-yearly="$20/yr">
-              <label class="addon-card" for="addon-larger-storage"
-                aria-label="Select Larger Storage add-on, $2 per month or $20 per year">
-                <div class="addon-details">
-                  <span class="addon-name">Larger storage</span>
-                  <span class="addon-description">Extra 1TB of cloud save</span>
-                </div>
-                <span id="addon-price-storage" class="addon-price" data-monthly="$2/mo"
-                  data-yearly="$20/yr">$2/mo</span>
-              </label>
-            </div>
-
-            <!-- add-on option customizable profile -->
-            <div class="addon-item">
-              <input type="checkbox" id="addon-customizable-profile" name="addon" value="customizable-profile"
-                addon-option="" data-monthly="$2/mo" data-yearly="$20/yr">
-              <label class="addon-card" for="addon-customizable-profile"
-                aria-label="Select Customizable Profile add-on, $2 per month or $20 per year">
-                <div class="addon-details">
-                  <span class="addon-name">Customizable profile</span>
-                  <span class="addon-description">Custom theme on your profile</span>
-                </div>
-                <span id="addon-price-custom" class="addon-price" data-monthly="$2/mo" data-yearly="$20/yr">$2/mo</span>
-              </label>
-            </div>
-
+        <div class="plan-item-container">
+          <div class="plan-item">
+            <input type="radio" id="plan-arcade" name="plan" value="arcade" data-monthly="$9/mo" data-yearly="$90/yr"
+              required>
+            <label class="plan-card" for="plan-arcade" aria-label="Select Arcade plan, $9 per month or $90 per year">
+              <img src="./assets/images/icon-arcade.svg" alt="Arcade plan icon" class="plan-icon">
+              <div class="plan-details">
+                <span class="plan-name">Arcade</span>
+                <span id="plan-price-arcade" class="plan-price" data-monthly="$9/mo" data-yearly="$90/yr">$9/mo</span>
+              </div>
+              <span class="data-free" data-free="2 months free" hidden>2 months free</span>
+            </label>
           </div>
 
-        </fieldset>
-      </section>
-      <!-- Step 3 end -->
-      <!-- ************************** -->
-      <!-- Step 4: Summary -->
-      <section class="step-card" aria-label="Step 4: Summary">
-        <fieldset class="personal-info-group">
-          <legend class="personal-info-header">Finishing up <br><span class="span-personal-info">Double-check everything
-              looks OK before confirming.</span></legend>
-
-          <div class="summary-container">
-
-            <div class="dynamically-options-container">
-              <!-- Dynamically add subscription and add-on selections here -->
-              <div class="summary-plan-group plan-title-group">
-                <!-- <span class="summary-plan-title"><span class="plan-price"></span></span> -->
-                <a href="#" class="link-change">Change</a>
+          <div class="plan-item">
+            <input type="radio" id="plan-advanced" name="plan" value="advanced" data-monthly="$12/mo"
+              data-yearly="$120/yr" required>
+            <label class="plan-card" for="plan-advanced"
+              aria-label="Select Advanced plan, $12 per month or $120 per year">
+              <img src="./assets/images/icon-advanced.svg" alt="Advanced plan icon" class="plan-icon">
+              <div class="plan-details">
+                <span class="plan-name">Advanced</span>
+                <span id="plan-price-advanced" class="plan-price" data-monthly="$12/mo"
+                  data-yearly="$120/yr">$12/mo</span>
               </div>
-              <div class="summary-plan-group summary-option">
-              </div>
-            </div>
-
-            <div class="summary-total-group">
-              <span>Total <span id="data-per">(per month)</span></span>
-              <span id="total-price" class="total-price">$0/mo</span>
-            </div>
-
+              <span class="data-free" data-free="2 months free" hidden>2 months free</span>
+            </label>
           </div>
 
-        </fieldset>
-      </section>
-      <!-- Step 4 end -->
-      <!-- ************************** -->
-      <!-- footer button -->
-      <footer class="footer-buttons-container" aria-label="Form navigation">
-        <div class="buttons-group">
-          <button type="button" class="btn-back" data-back>Go Back</button>
-          <button type="button" class="btn-next" data-next>Next Step</button>
-          <button type="submit" class="btn-confirm" data-confirm>Confirm</button>
+          <div class="plan-item">
+            <input type="radio" id="plan-pro" name="plan" value="pro" data-monthly="$15/mo" data-yearly="$150/yr"
+              required>
+            <label class="plan-card" for="plan-pro" aria-label="Select Pro plan, $15 per month or $150 per year">
+              <img src="./assets/images/icon-pro.svg" alt="Pro plan icon" class="plan-icon">
+              <div class="plan-details">
+                <span class="plan-name">Pro</span>
+                <span id="plan-price-pro" class="plan-price" data-monthly="$15/mo" data-yearly="$150/yr">$15/mo</span>
+              </div>
+              <span class="data-free" data-free="2 months free" hidden>2 months free</span>
+            </label>
+          </div>
         </div>
-      </footer>
-    </form>
-    <!-- ************************** -->
-    <!-- Step 5: confirming -->
-    <section class="step-confirmation">
-      <img src="./assets/images/icon-thank-you.svg" alt="icon thank you">
-      <div class="des-confirm">
-        <h3 class="heading-confirmation">Thank you!</h3>
-        <p class="des-confirmation">Thanks for confirming your subscription! We hope you have fun
-          using our platform. If you ever need support, please feel free
-          to email us at support@loremgaming.com.</p>
+      </fieldset>
+
+      <div class="billing-toggle">
+        <span class="toggle-label monthly active-time">Monthly</span>
+        <label class="switch" for="billing-cycle" aria-label="Toggle billing cycle">
+          <input type="checkbox" id="billing-cycle" name="billingCycle">
+          <span class="slider"></span>
+        </label>
+        <span class="toggle-label yearly">Yearly</span>
       </div>
     </section>
-  </main>
+
+    <section class="step-card" aria-label="Step 3: Add-ons">
+      <fieldset class="personal-info-group">
+        <legend class="personal-info-header">
+          Pick add-ons <br>
+          <span class="span-personal-info">Add-ons help enhance your gaming experience.</span>
+        </legend>
+
+        <div class="addons-item-container">
+          <div class="addon-item">
+            <input type="checkbox" id="addon-online-service" name="addon" value="online-service" data-monthly="$1/mo"
+              data-yearly="$10/yr">
+            <label class="addon-card" for="addon-online-service"
+              aria-label="Select Online Service add-on, $1 per month or $10 per year">
+              <div class="addon-details">
+                <span class="addon-name">Online service</span>
+                <span class="addon-description">Access to multiplayer games</span>
+              </div>
+              <span id="addon-price-service" class="addon-price" data-monthly="$1/mo" data-yearly="$10/yr">$1/mo</span>
+            </label>
+          </div>
+
+          <div class="addon-item">
+            <input type="checkbox" id="addon-larger-storage" name="addon" value="larger-storage" data-monthly="$2/mo"
+              data-yearly="$20/yr">
+            <label class="addon-card" for="addon-larger-storage"
+              aria-label="Select Larger Storage add-on, $2 per month or $20 per year">
+              <div class="addon-details">
+                <span class="addon-name">Larger storage</span>
+                <span class="addon-description">Extra 1TB of cloud save</span>
+              </div>
+              <span id="addon-price-storage" class="addon-price" data-monthly="$2/mo" data-yearly="$20/yr">$2/mo</span>
+            </label>
+          </div>
+
+          <div class="addon-item">
+            <input type="checkbox" id="addon-customizable-profile" name="addon" value="customizable-profile"
+              data-monthly="$2/mo" data-yearly="$20/yr">
+            <label class="addon-card" for="addon-customizable-profile"
+              aria-label="Select Customizable Profile add-on, $2 per month or $20 per year">
+              <div class="addon-details">
+                <span class="addon-name">Customizable profile</span>
+                <span class="addon-description">Custom theme on your profile</span>
+              </div>
+              <span id="addon-price-custom" class="addon-price" data-monthly="$2/mo" data-yearly="$20/yr">$2/mo</span>
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </section>
+
+    <section class="step-card" aria-label="Step 4: Summary">
+      <fieldset class="personal-info-group">
+        <legend class="personal-info-header">
+          Finishing up <br>
+          <span class="span-personal-info">Double-check everything looks OK before confirming.</span>
+        </legend>
+
+        <div class="summary-container">
+          <div class="dynamically-options-container">
+            <div class="summary-plan-group plan-title-group"></div>
+            <div class="summary-plan-group summary-option"></div>
+          </div>
+
+          <div class="summary-total-group">
+            <span>Total <span id="data-per">(per month)</span></span>
+            <span id="total-price" class="total-price">$0/mo</span>
+          </div>
+        </div>
+      </fieldset>
+    </section>
+
+    <footer class="footer-buttons-container" aria-label="Form navigation">
+      <div class="buttons-group">
+        <button type="button" class="btn-back" data-back>Go Back</button>
+        <button type="button" class="btn-next" data-next>Next Step</button>
+        <button type="submit" class="btn-confirm" data-confirm>Confirm</button>
+      </div>
+    </footer>
+  </form>
+
+  <section class="step-confirmation" hidden>
+    <img src="./assets/images/icon-thank-you.svg" alt="icon thank you">
+    <div class="des-confirm">
+      <h2 class="heading-confirmation">Thank you!</h2>
+      <p class="des-confirmation">
+        Thanks for confirming your subscription! We hope you have fun using our platform.
+        If you ever need support, please feel free to email us at support@loremgaming.com.
+      </p>
+    </div>
+  </section>
+
+</main>
 
 </body>
 
