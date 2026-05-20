@@ -143,6 +143,11 @@ body {
   text-wrap: nowrap;
 }
 
+.step-item-number,
+.step-item-title {
+  display: if(media(width < 768px): none; else: auto);
+}
+
 .app-container {
   display: flex;
   justify-content: space-between;
@@ -661,9 +666,10 @@ input:focus-visible {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    width: clamp(375px, 60vw, 768px);
     height: 100vh;
     padding: 0px;
+    margin: 0 auto;
   }
 
   /* navigation container */
@@ -695,11 +701,13 @@ input:focus-visible {
 
   /* multi form container */
   #multi-form {
-    width: 90%;
+    width: clamp(375px, 60vw, 500px);
     height: auto;
     display: flex;
     padding: 0px;
-    border-radius: var(--font-size-xxs); /* 0.75 rem*/
+    padding-inline: var(--font-size-s);
+    border-radius: var(--font-size-xxs);
+    /* 0.75 rem*/
   }
 
   /* Step card */
@@ -713,16 +721,20 @@ input:focus-visible {
   .personal-info-header {
     margin-block-end: var(--font-size-xl);
     font-size: var(--font-size-xl);
-      /* 1.75 rem*/
+    /* 1.75 rem*/
     width: 85%;
+    margin-inline-start: var(--font-size-xs);
   }
 
   .personal-info-header .span-personal-info {
-    font-size: var(--font-size-m); /* 1.25 rem*/
+    font-size: var(--font-size-m);
+    /* 1.25 rem*/
   }
 
   .input-personal-group {
     margin-block-end: var(--size-xl);
+    width: clamp(375px, 60vw, 500px);
+    padding-inline: var(--font-size-xs);
   }
 
   .input-personal-group input {
@@ -746,21 +758,85 @@ input:focus-visible {
     width: 100%;
     height: max-content;
   }
-  
+
   .plan-item-container .plan-item:last-child {
-      margin-block-end: var(--font-size-xl);
-    }
+    margin-block-end: var(--font-size-xl);
+  }
 
-    .plan-card {
-      flex-direction: row;
-      align-items: space-between;
-      gap: var(--font-size-s);
-      width: 100%;
-      height: 100%;
-    }
+  .plan-card {
+    flex-direction: row;
+    align-items: space-between;
+    gap: var(--font-size-s);
+    width: 100%;
+    height: 100%;
+  }
 
-    .billing-toggle {
-      margin-block-end: var(--font-size-xl);
-    }
+  .billing-toggle {
+    margin-block-end: var(--font-size-xl);
+  }
+
+  /* Step 3: Add-ons */
+  .addons-item-container {
+    flex-direction: column;
+    gap: var(--size-xs);
+    padding-block-start: var(--size-xl);
+    /* 2rem */
+    width: 100%;
+    margin-block-end: var(--font-size-xl);
+  }
+
+  .addon-item {
+    width: 100%;
+    height: 78px;
+    padding-inline: var(--size-xs);
+    /* 16px */
+    padding-block: 0px;
+  }
+
+  .addon-card {
+    gap: var(--size-xs);
+    /* 1rem */
+    width: 100%;
+  }
+
+  .addon-card .addon-details {
+    gap: 4px;
+    width: 100%;
+    margin-inline-start: 32px;
+  }
+
+  .addon-name {
+    width: 100%;
+  }
+
+  .addon-description {
+    width: 100%;
+  }
+
+  .addon-price {
+    width: 50px;
+  }
+
+  /* Step 4: Summary */
+
+  .summary-container {
+    justify-content: flex-start;
+    padding-block: var(--size-s);
+  }
+
+  .summary-container .dynamically-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--font-size-m);
+    width: 100%;
+    padding: var(--font-size-xl);
+    margin-block-end: var(--font-size-xl);
+  }
+
+  /* Step 5: Confirmation */
+  .step-confirmation {
+    width: 100%;
+    padding: var(--font-size-xl);
+  }
 
 }
