@@ -31,6 +31,7 @@
   --size-xl: 2rem;
   --size-xxl: 2.5rem;
   --size-4xl: 3rem;
+  /*font size*/
   --font-size-xxs: 0.75rem;
   --font-size-xs: 0.875rem;
   --font-size-s: 1rem;
@@ -145,8 +146,8 @@ body {
 
 .step-item-number,
 .step-item-title {
-  display: if(media(width < 768px): none; else: auto);
-  opacity: if(media(width < 768px): 0; else: 1);
+  display: if(media(width < 769px): none; else: auto);
+  opacity: if(media(width < 769px): 0; else: 1);
 }
 
 .app-container {
@@ -706,6 +707,7 @@ input:focus-visible {
     display: flex;
     padding: 0px;
     padding-inline: var(--font-size-s);
+    padding-block-end: var(--font-size-s);
     border-radius: var(--font-size-xxs);
     /* 0.75 rem*/
   }
@@ -719,11 +721,11 @@ input:focus-visible {
 
   /* Step 1 - Plan Selection */
   .personal-info-header {
-    margin-block-end: var(--font-size-xl);
-    font-size: var(--font-size-xl);
-    /* 1.75 rem*/
-    width: 85%;
-    margin-inline-start: var(--font-size-xs);
+    margin-block-end: var(--size-s);
+    font-size: var(--font-size-l);
+    /* 1.5 rem*/
+    width: 90%;
+    margin-inline-start: var(--size-xs);
   }
 
   .personal-info-header .span-personal-info {
@@ -738,7 +740,7 @@ input:focus-visible {
   }
 
   .input-personal-group input {
-    margin-block-end: var(--size-s);
+    margin-block-end: var(--size-xs);
   }
 
   /* Step 2: Select plan */
@@ -768,11 +770,13 @@ input:focus-visible {
     align-items: space-between;
     gap: var(--font-size-s);
     width: 100%;
-    height: 100%;
+    height: 50%;
+    padding-block-end: 0px;
   }
 
   .billing-toggle {
-    margin-block-end: var(--font-size-xl);
+    margin-block-end: var(--font-size-s);
+    width: 100%;
   }
 
   /* Step 3: Add-ons */
@@ -831,6 +835,11 @@ input:focus-visible {
     width: 100%;
     padding: var(--font-size-xl);
     margin-block-end: var(--font-size-xl);
+  }
+
+  /* footer buttons container */
+  .footer-buttons-container .buttons-group {
+    width: 100%;
   }
 
   /* Step 5: Confirmation */
