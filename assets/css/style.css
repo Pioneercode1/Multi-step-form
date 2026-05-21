@@ -146,6 +146,7 @@ body {
 .step-item-number,
 .step-item-title {
   display: if(media(width < 768px): none; else: auto);
+  opacity: if(media(width < 768px): 0; else: 1);
 }
 
 .app-container {
@@ -687,22 +688,21 @@ input:focus-visible {
 
   .steps-list {
     list-style: none;
-    display: flex;
     flex-direction: row;
     gap: 0px;
     width: 50%;
     height: 50%;
     margin: 0px;
     position: absolute;
-    top: 30%;
-    right: 50%;
-    transform: translate(-50%, -50%);
+    top: 0%;
+    left: 25%;
+    transform: translate(-50% -50%);
   }
 
   /* multi form container */
   #multi-form {
     width: clamp(375px, 60vw, 500px);
-    height: auto;
+    height: 100%;
     display: flex;
     padding: 0px;
     padding-inline: var(--font-size-s);
