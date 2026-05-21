@@ -5,6 +5,7 @@
   --black: hsla(0, 0%, 0%, 1);
   --blue-300: hsl(228, 100%, 84%);
   --blue-200: hsl(206, 94%, 87%);
+  /*--color: #473dff;*/
   --red-500: hsl(354, 84%, 57%);
   --gray-1: hsl(230, 3%, 62%);
   --light-gray: hsl(231, 100%, 99%);
@@ -61,8 +62,9 @@ body {
   font-family: "Ubuntu", sans-serif;
   font-weight: var(--weight-regular);
   font-style: normal;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* navigation container */
@@ -162,7 +164,7 @@ body {
   padding: var(--size-m);
   padding-inline-end: var(--size-4xl);
   margin-block-start: 105px;
-  margin-inline-start: 250px;
+  /*margin-inline-start: 250px;*/
 }
 
 /* multi form container */
@@ -289,7 +291,7 @@ body {
 }
 
 .plan-card:hover {
-  border-color: #473dff;
+  border-color: var(--violet-2);
 }
 
 .plan-card .plan-details {
@@ -312,7 +314,7 @@ body {
 }
 
 .plan-price {
-  color: #9699ab;
+  color: var(--grey-500);
   font-size: 0.9rem;
 }
 
@@ -339,7 +341,7 @@ body {
 }
 
 .toggle-label {
-  color: #9699ab;
+  color: var(--grey-500);
   font-weight: 700;
   font-size: 0.9rem;
   transition: color 0.3s ease;
@@ -547,6 +549,10 @@ body {
   align-items: center;
 }
 
+.summary-plan-title .plan-price {
+  color: var(--blue-950);
+}
+
 .summary-plan-group .summary-option-title {
   display: flex;
   justify-content: space-between;
@@ -555,7 +561,7 @@ body {
 }
 
 .summary-option-title .option-price {
-  color: var(--dark-green);
+  color: var(--violet);
   font-weight: var(--weight-normal);
 }
 
@@ -708,8 +714,9 @@ input:focus-visible {
     padding: 0px;
     padding-inline: var(--font-size-s);
     padding-block-end: var(--font-size-s);
-    border-radius: var(--font-size-xxs);
-    /* 0.75 rem*/
+    margin-block-start: -80px;
+    background-color: var(--white);
+    z-index: 99;
   }
 
   /* Step card */
@@ -845,6 +852,7 @@ input:focus-visible {
   /* Step 5: Confirmation */
   .step-confirmation {
     width: 100%;
+    height: 100%;
     padding: var(--font-size-xl);
   }
 

@@ -169,6 +169,10 @@ if (linkChange) {
 
 onYearly.addEventListener("change", () => {
     const isYearly = onYearly.checked;
+    const toggleMonthly = document.querySelector(".monthly");
+    const toggleYearly = document.querySelector(".yearly");
+    toggleMonthly.classList.toggle("active-time");
+    toggleYearly.classList.toggle("active-time");
 
     freeTwoMonths.forEach(span => span.hidden = !isYearly);
 
