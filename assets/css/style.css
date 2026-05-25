@@ -250,6 +250,12 @@ body {
   font-weight: var(--weight-bold);
 }
 
+.input-error {
+  border: none;
+  outline: 2px solid var(--red-500);
+  background-color: var(--light-violet);
+}
+
 /* Step 2: Select plan */
 
 .plan-item-container {

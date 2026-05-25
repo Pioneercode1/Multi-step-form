@@ -133,14 +133,17 @@ multiForm.addEventListener("click", e => {
         const valid = [...inputs].every(input => input.checkValidity());
 
         if (!valid) {
-            inputs.forEach(input => input.reportValidity());
+            inputs.forEach((input, index) => {
+                input.reportValidity() && input.focus()
+                input.classList.toggle("input-error", !input.checkValidity());
+            });
             return;
         }
 
         saveCurrentStepData();
 
         if (currentStep < stepCard.length - 1) {
-            currentStep++;
+            currentStep++
             if (currentStep === 3) {
                 renderSummary();
             }
@@ -195,7 +198,6 @@ multiForm.addEventListener("submit", event => {
     multiForm.style.display = "none";
     stepConfirmation.classList.add("goActive");
 
-    //console.log("data it is ready for send to server:", formState);
 });
 
 updateProgress();
