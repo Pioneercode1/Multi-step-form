@@ -146,12 +146,13 @@ body {
   text-wrap: nowrap;
 }
 
+/*
 .step-item-number,
 .step-item-title {
   display: if(media(width < 769px): none; else: auto);
   opacity: if(media(width < 769px): 0; else: 1);
 }
-
+*/
 .app-container {
   display: flex;
   justify-content: space-between;
@@ -179,6 +180,7 @@ body {
   /* 2rem */
   padding-block-end: var(--size-xs);
   /* 1rem */
+  overflow: hidden;
 }
 
 /* Step card */
@@ -189,14 +191,34 @@ body {
   flex-direction: column;
   width: 450px;
   height: 568px;
-  opacity: 1;
+  opacity: 0;
   pointer-events: none;
+  transform: translateX(-300%);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    visibility 0.4s;
 }
 
 .step-card.active {
   display: flex;
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
+  transform: translateX(0);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-300%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }
 
 .step-card fieldset {
@@ -634,12 +656,28 @@ body {
   padding-inline-end: var(--font-size-m);
   opacity: 0;
   pointer-events: none;
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
 }
 
 .step-confirmation.goActive {
   display: flex;
   opacity: 1;
   pointer-events: auto;
+  animation: fadeConfIn 0.5s ease-out;
+}
+
+@keyframes fadeConfIn {
+  from {
+    opacity: 0;
+    transform: translate(-100%, -50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
 }
 
 .step-confirmation .des-confirm {
@@ -711,6 +749,11 @@ input:focus-visible {
     top: 0%;
     left: 25%;
     transform: translate(-50% -50%);
+  }
+
+  .step-item-number,
+  .step-item-title {
+    display: none;
   }
 
   /* multi form container */

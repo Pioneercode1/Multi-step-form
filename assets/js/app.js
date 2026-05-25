@@ -89,7 +89,7 @@ function saveCurrentStepData() {
 
 function renderSummary() {
     const existingTitle = summaryTitleGroup.querySelector('.summary-plan-title');
-    if (existingTitle) {existingTitle.remove();}
+    if (existingTitle) { existingTitle.remove(); }
 
     if (formState.plan.name) {
         const planTitleSpan = document.createElement("span");
@@ -130,15 +130,27 @@ multiForm.addEventListener("click", e => {
 
     if (target.matches("[data-next]")) {
         const inputs = stepCard[currentStep].querySelectorAll("input");
-        const valid = [...inputs].every(input => input.checkValidity());
+        
+        //
 
-        if (!valid) {
-            inputs.forEach((input, index) => {
-                input.reportValidity() && input.focus()
-                input.classList.toggle("input-error", !input.checkValidity());
-            });
+        const invalidInputs = [...inputs].filter(
+            input => !input.checkValidity()
+        );
+
+        inputs.forEach(input => {
+            input.classList.toggle(
+                "input-error",
+                invalidInputs.includes(input)
+            );
+        });
+        
+        if (invalidInputs.length > 0) {
+            invalidInputs[0].reportValidity();
+            invalidInputs[0].focus();
             return;
         }
+        
+        //
 
         saveCurrentStepData();
 
